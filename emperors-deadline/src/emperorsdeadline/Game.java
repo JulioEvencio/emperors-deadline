@@ -12,6 +12,8 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import emperorsdeadline.screens.Menu;
+
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
@@ -19,13 +21,26 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final String VERSION = "0.1";
 
 	public static final int SCALE = 1;
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 600;
+	public static final int WIDTH = 720;
+	public static final int HEIGHT = 480;
+
+	public static int gameState = 1;
+
+	public static final int GAME_MENU = 1;
+	public static final int GAME_RUN = 2;
+	public static final int GAME_PAUSED = 3;
+	public static final int GAME_OVER = 4;
+	public static final int GAME_EXIT = 5;
+	public static final int GAME_CREDITS = 6;
+	public static final int GAME_TUTORIAL = 7;
+	public static final int GAME_VICTORY = 8;
 
 	private int fps;
 	private boolean showFPS;
 
 	private final BufferedImage renderer;
+
+	private final Menu menu;
 
 	public Game() {
 		this.addKeyListener(this);
@@ -33,10 +48,16 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
 		this.renderer = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_RGB);
+
+		this.menu = new Menu();
 	}
 
 	private void tick() {
-		// Code
+		switch (Game.gameState) {
+			case Game.GAME_MENU:
+				this.menu.tick();
+				break;
+		}
 	}
 
 	private void render() {
@@ -58,6 +79,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 		Graphics graphics = bs.getDrawGraphics();
 		graphics.drawImage(this.renderer, 0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE, null);
+
+		switch (Game.gameState) {
+			case Game.GAME_MENU:
+				this.menu.render(graphics);
+				break;
+		}
 
 		if (showFPS) {
 			graphics.setColor(Color.WHITE);
@@ -112,6 +139,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		switch (Game.gameState) {
+			case Game.GAME_MENU:
+				this.menu.keyReleased(e);
+		}
+
 		if (e.getKeyCode() == KeyEvent.VK_F3) {
 			this.showFPS = !this.showFPS;
 		}
