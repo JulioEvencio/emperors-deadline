@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import emperorsdeadline.screens.Credits;
 import emperorsdeadline.screens.Menu;
+import emperorsdeadline.screens.Tutorial;
 import emperorsdeadline.strings.StringError;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
@@ -28,7 +29,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int WIDTH = 720;
 	public static final int HEIGHT = 480;
 
-	public static int gameState = 1;
+	public static int gameState;
 
 	public static final int GAME_MENU = 1;
 	public static final int GAME_RUN = 2;
@@ -45,6 +46,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private final BufferedImage renderer;
 
 	private final Menu menu;
+	private final Tutorial tutorial;
 	private final Credits credits;
 
 	public Game() {
@@ -52,9 +54,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.addMouseListener(this);
 		this.setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
+		Game.gameState = Game.GAME_MENU;
 		this.renderer = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_RGB);
 
 		this.menu = new Menu();
+		this.tutorial = new Tutorial();
 		this.credits = new Credits();
 	}
 
@@ -92,6 +96,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch (Game.gameState) {
 			case Game.GAME_MENU:
 				this.menu.render(graphics);
+				break;
+			case Game.GAME_TUTORIAL:
+				this.tutorial.render(graphics);
 				break;
 			case Game.GAME_CREDITS:
 				this.credits.render(graphics);
@@ -154,6 +161,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch (Game.gameState) {
 			case Game.GAME_MENU:
 				this.menu.keyReleased(e);
+				break;
+			case Game.GAME_TUTORIAL:
+				this.tutorial.keyReleased(e);
 				break;
 			case Game.GAME_CREDITS:
 				this.credits.keyReleased(e);

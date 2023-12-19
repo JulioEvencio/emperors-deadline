@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 
 import emperorsdeadline.Game;
 import emperorsdeadline.strings.StringGame;
-import emperorsdeadline.strings.StringMenu;
+import emperorsdeadline.strings.StringScreen;
 
 public class Menu {
 
@@ -30,10 +30,10 @@ public class Menu {
 		this.down = false;
 		this.enter = false;
 
-		this.options[0] = StringMenu.NEW_GAME;
-		this.options[1] = StringMenu.TUTORIAL;
-		this.options[2] = StringMenu.CREDITS;
-		this.options[3] = StringMenu.EXIT;
+		this.options[0] = StringScreen.NEW_GAME;
+		this.options[1] = StringScreen.TUTORIAL;
+		this.options[2] = StringScreen.CREDITS;
+		this.options[3] = StringScreen.EXIT;
 	}
 
 	public void tick() {
@@ -104,7 +104,7 @@ public class Menu {
 
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
-		graphics.drawString(StringMenu.INFO, Game.WIDTH / 2 - 180, 414);
+		graphics.drawString(StringScreen.NAVIGATE_THE_MENU, Game.WIDTH / 2 - 180, 414);
 	}
 
 	public void keyReleased(KeyEvent e) {
