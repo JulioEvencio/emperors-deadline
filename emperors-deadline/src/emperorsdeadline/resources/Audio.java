@@ -9,39 +9,32 @@ import javax.sound.sampled.DataLine;
 import emperorsdeadline.Game;
 import emperorsdeadline.strings.StringError;
 
-public class Sound {
+public class Audio {
 
 	private final String path;
 	private Clip clip;
 
-	public Sound(String path) {
+	public Audio(String path) {
 		this.path = path;
 	}
 
-	public void soundPlay() {
+	public void audioPlay() {
 		if (this.clip != null && !this.clip.isRunning()) {
 			this.clip.setFramePosition(0);
 			this.clip.start();
 		}
 	}
 
-	public void soundStop() {
+	public void audioStop() {
 		if (this.clip != null && this.clip.isRunning()) {
 			this.clip.stop();
 			this.clip.setFramePosition(0);
 		}
 	}
 
-	public void soundLoop() {
-		if (this.clip != null && !this.clip.isRunning()) {
-			this.clip.setFramePosition(0);
-			this.clip.loop(Clip.LOOP_CONTINUOUSLY);
-		}
-	}
-
 	private void loadClip() {
 		try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Sound.class.getResource(this.path));
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getResource(this.path));
 			AudioFormat format = audioInputStream.getFormat();
 
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -65,7 +58,7 @@ public class Sound {
 		@Override
 		public void run() {
 			loadClip();
-			soundStop();
+			audioStop();
 		}
 	}
 
