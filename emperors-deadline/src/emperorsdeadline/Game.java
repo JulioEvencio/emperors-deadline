@@ -12,7 +12,10 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JOptionPane;
+
 import emperorsdeadline.screens.Menu;
+import emperorsdeadline.strings.StringError;
 
 public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
 
@@ -56,6 +59,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch (Game.gameState) {
 			case Game.GAME_MENU:
 				this.menu.tick();
+				break;
+			case Game.GAME_EXIT:
+				Game.exitGame();
 				break;
 		}
 	}
@@ -177,6 +183,15 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		System.out.println("Hello, world!");
+	}
+
+	public static void exitGame() {
+		System.exit(0);
+	}
+
+	public static void exitWithError(String error) {
+		JOptionPane.showMessageDialog(null, error, StringError.ERROR, JOptionPane.ERROR_MESSAGE);
+		Game.exitGame();
 	}
 
 }
