@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JOptionPane;
 
+import emperorsdeadline.scenarios.Scenario;
 import emperorsdeadline.screens.Credits;
 import emperorsdeadline.screens.Menu;
 import emperorsdeadline.screens.Tutorial;
@@ -40,6 +41,8 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private final Tutorial tutorial;
 	private final Credits credits;
 
+	private Scenario scenario;
+
 	public Game() {
 		this.addKeyListener(this);
 		this.addMouseListener(this);
@@ -51,10 +54,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.menu = new Menu();
 		this.tutorial = new Tutorial();
 		this.credits = new Credits();
+
+		this.scenario = new Scenario();
 	}
 
 	private void tick() {
-		if (Game.gameState == GameState.MENU) {
+		if (Game.gameState == GameState.RUN) {
+			this.scenario.tick();
+		} else if (Game.gameState == GameState.MENU) {
 			this.menu.tick();
 		} else if (Game.gameState == GameState.EXIT) {
 			Game.exitGame();
@@ -74,7 +81,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		render.setColor(Color.BLACK);
 		render.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
-		// Code
+		if (Game.gameState == GameState.RUN) {
+			this.scenario.render(render);
+		}
 
 		render.dispose();
 
@@ -182,7 +191,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Hello, world!");
+		if (Game.gameState == GameState.RUN) {
+			this.scenario.mouseReleased(e);
+		}
 	}
 
 	public static void exitGame() {
