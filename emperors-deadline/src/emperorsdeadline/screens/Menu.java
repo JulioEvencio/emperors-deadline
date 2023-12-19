@@ -76,35 +76,35 @@ public class Menu {
 
 		graphics.setColor(Color.YELLOW);
 		graphics.setFont(new Font("arial", Font.BOLD, 36));
-		graphics.drawString(StringGame.TITLE, Game.WIDTH * Game.SCALE / 2 - 180, Game.HEIGHT * Game.SCALE / 2 - 150);
+		graphics.drawString(StringGame.TITLE, Game.WIDTH / 2 - 180, Game.HEIGHT / 2 - 150);
 
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("arial", Font.BOLD, 24));
 
-		graphics.drawString(options[0], Game.WIDTH * Game.SCALE / 2 - 50, 150);
-		graphics.drawString(options[1], Game.WIDTH * Game.SCALE / 2 - 50, 200);
-		graphics.drawString(options[2], Game.WIDTH * Game.SCALE / 2 - 50, 250);
-		graphics.drawString(options[3], Game.WIDTH * Game.SCALE / 2 - 50, 300);
+		graphics.drawString(options[0], Game.WIDTH / 2 - 50, 150);
+		graphics.drawString(options[1], Game.WIDTH / 2 - 50, 200);
+		graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
+		graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 
 		graphics.setColor(Color.YELLOW);
 
 		if (currentOption == 0) {
-			graphics.drawString("-> ", Game.WIDTH * Game.SCALE / 2 - 90, 150);
-			graphics.drawString(options[0], Game.WIDTH * Game.SCALE / 2 - 50, 150);
+			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 150);
+			graphics.drawString(options[0], Game.WIDTH / 2 - 50, 150);
 		} else if (currentOption == 1) {
-			graphics.drawString("-> ", Game.WIDTH * Game.SCALE / 2 - 90, 200);
-			graphics.drawString(options[1], Game.WIDTH * Game.SCALE / 2 - 50, 200);
+			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 200);
+			graphics.drawString(options[1], Game.WIDTH / 2 - 50, 200);
 		} else if (currentOption == 2) {
-			graphics.drawString("-> ", Game.WIDTH * Game.SCALE / 2 - 90, 250);
-			graphics.drawString(options[2], Game.WIDTH * Game.SCALE / 2 - 50, 250);
+			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 250);
+			graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
 		} else if (currentOption == 3) {
-			graphics.drawString("-> ", Game.WIDTH * Game.SCALE / 2 - 90, 300);
-			graphics.drawString(options[3], Game.WIDTH * Game.SCALE / 2 - 50, 300);
+			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 300);
+			graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 		}
 
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
-		graphics.drawString(StringMenu.INFO, Game.WIDTH * Game.SCALE / 2 - 180, 414);
+		graphics.drawString(StringMenu.INFO, Game.WIDTH / 2 - 180, 414);
 	}
 
 	public void keyReleased(KeyEvent e) {
