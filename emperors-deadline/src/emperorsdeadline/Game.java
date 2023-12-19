@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JOptionPane;
 
+import emperorsdeadline.screens.Credits;
 import emperorsdeadline.screens.Menu;
 import emperorsdeadline.strings.StringError;
 
@@ -44,6 +45,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private final BufferedImage renderer;
 
 	private final Menu menu;
+	private final Credits credits;
 
 	public Game() {
 		this.addKeyListener(this);
@@ -53,6 +55,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.renderer = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_RGB);
 
 		this.menu = new Menu();
+		this.credits = new Credits();
 	}
 
 	private void tick() {
@@ -89,6 +92,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch (Game.gameState) {
 			case Game.GAME_MENU:
 				this.menu.render(graphics);
+				break;
+			case Game.GAME_CREDITS:
+				this.credits.render(graphics);
 				break;
 		}
 
@@ -148,6 +154,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		switch (Game.gameState) {
 			case Game.GAME_MENU:
 				this.menu.keyReleased(e);
+				break;
+			case Game.GAME_CREDITS:
+				this.credits.keyReleased(e);
+				break;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_F3) {
