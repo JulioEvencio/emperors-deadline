@@ -29,16 +29,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int WIDTH = 720;
 	public static final int HEIGHT = 480;
 
-	public static int gameState;
-
-	public static final int GAME_MENU = 1;
-	public static final int GAME_RUN = 2;
-	public static final int GAME_PAUSED = 3;
-	public static final int GAME_OVER = 4;
-	public static final int GAME_EXIT = 5;
-	public static final int GAME_CREDITS = 6;
-	public static final int GAME_TUTORIAL = 7;
-	public static final int GAME_VICTORY = 8;
+	public static GameState gameState;
 
 	private int fps;
 	private boolean showFPS;
@@ -54,7 +45,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.addMouseListener(this);
 		this.setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
-		Game.gameState = Game.GAME_MENU;
+		Game.gameState = GameState.MENU;
 		this.renderer = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_RGB);
 
 		this.menu = new Menu();
@@ -63,13 +54,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	}
 
 	private void tick() {
-		switch (Game.gameState) {
-			case Game.GAME_MENU:
-				this.menu.tick();
-				break;
-			case Game.GAME_EXIT:
-				Game.exitGame();
-				break;
+		if (Game.gameState == GameState.MENU) {
+			this.menu.tick();
+		} else if (Game.gameState == GameState.EXIT) {
+			Game.exitGame();
 		}
 	}
 
@@ -93,22 +81,18 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		Graphics graphics = bs.getDrawGraphics();
 		graphics.drawImage(this.renderer, 0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE, null);
 
-		switch (Game.gameState) {
-			case Game.GAME_MENU:
-				this.menu.render(graphics);
-				break;
-			case Game.GAME_TUTORIAL:
-				this.tutorial.render(graphics);
-				break;
-			case Game.GAME_CREDITS:
-				this.credits.render(graphics);
-				break;
+		if (Game.gameState == GameState.MENU) {
+			this.menu.render(graphics);
+		} else if (Game.gameState == GameState.TUTORIAL) {
+			this.tutorial.render(graphics);
+		} else if (Game.gameState == GameState.CREDITS) {
+			this.credits.render(graphics);
 		}
 
-		if (showFPS) {
+		if (this.showFPS) {
 			graphics.setColor(Color.WHITE);
 			graphics.setFont(new Font("arial", Font.BOLD, 20));
-			graphics.drawString("FPS: " + fps, Game.WIDTH - 100, 32);
+			graphics.drawString("FPS: " + this.fps, Game.WIDTH - 100, 32);
 		}
 
 		bs.show();
@@ -158,16 +142,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		switch (Game.gameState) {
-			case Game.GAME_MENU:
-				this.menu.keyReleased(e);
-				break;
-			case Game.GAME_TUTORIAL:
-				this.tutorial.keyReleased(e);
-				break;
-			case Game.GAME_CREDITS:
-				this.credits.keyReleased(e);
-				break;
+		if (Game.gameState == GameState.MENU) {
+			this.menu.keyReleased(e);
+		} else if (Game.gameState == GameState.TUTORIAL) {
+			this.tutorial.keyReleased(e);
+		} else if (Game.gameState == GameState.CREDITS) {
+			this.credits.keyReleased(e);
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_F3) {

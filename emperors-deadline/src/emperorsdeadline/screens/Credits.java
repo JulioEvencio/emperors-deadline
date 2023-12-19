@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import emperorsdeadline.Game;
+import emperorsdeadline.GameState;
 import emperorsdeadline.strings.StringScreen;
 
 public class Credits {
@@ -31,7 +32,7 @@ public class Credits {
 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Game.gameState = Game.GAME_MENU;
+			Game.gameState = GameState.MENU;
 		}
 	}
 

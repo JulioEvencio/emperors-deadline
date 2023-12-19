@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import emperorsdeadline.Game;
+import emperorsdeadline.GameState;
 import emperorsdeadline.strings.StringGame;
 import emperorsdeadline.strings.StringScreen;
 
@@ -59,13 +60,13 @@ public class Menu {
 			this.enter = false;
 
 			if (this.currentOption == 0) {
-				Game.gameState = Game.GAME_RUN;
+				Game.gameState = GameState.RUN;
 			} else if (this.currentOption == 1) {
-				Game.gameState = Game.GAME_TUTORIAL;
+				Game.gameState = GameState.TUTORIAL;
 			} else if (this.currentOption == 2) {
-				Game.gameState = Game.GAME_CREDITS;
+				Game.gameState = GameState.CREDITS;
 			} else if (this.currentOption == 3) {
-				Game.gameState = Game.GAME_EXIT;
+				Game.gameState = GameState.EXIT;
 			}
 		}
 	}
