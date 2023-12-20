@@ -7,11 +7,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import emperorsdeadline.Game;
-import emperorsdeadline.entities.Farm;
-import emperorsdeadline.entities.Sawmill;
-import emperorsdeadline.entities.StoneMine;
+import emperorsdeadline.entities.buildings.Farm;
+import emperorsdeadline.entities.buildings.Sawmill;
+import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.strings.StringScenario;
-import emperorsdeadline.util.Util;
 
 public class Scenario {
 
@@ -35,14 +34,14 @@ public class Scenario {
 		this.daysRemaining = 7;
 		this.gameCycle = 0;
 
-		this.gold = 10;
+		this.gold = 0;
 		this.soldiers = 0;
 
-		this.food = 10;
-		this.population = 10;
+		this.food = 0;
+		this.population = 0;
 
 		this.stone = 0;
-		this.wood = 30;
+		this.wood = 0;
 
 		this.sawmill = new Sawmill(20, 100);
 		this.stoneMine = new StoneMine(120, 100);
@@ -56,23 +55,14 @@ public class Scenario {
 			this.daysRemaining--;
 			this.gameCycle = 0;
 
-			this.gold += (this.gold > 999) ? 999 : this.population;
-			this.soldiers += (this.soldiers > 999) ? 999 : 3; 
+			// this.gold += (this.gold > 999) ? 999 : this.population;
+			// this.soldiers += (this.soldiers > 999) ? 999 : 3; 
 
-			this.food += (this.food > 999) ? 999 : this.farm.getResources() - Util.generateRandomNumber(this.soldiers, this.soldiers * 3);
-			this.population += (this.population > 999) ? 999 : 1;
+			this.food += this.farm.getProduction();
+			// this.population += (this.population > 999) ? 999 : 1;
 
-			this.stone += this.stoneMine.getResources();
-			this.wood += this.sawmill.getResources();
-			
-			if (this.food < 0) {
-				this.soldiers -= this.food;
-				this.food = 0;
-				
-				if (this.soldiers < 0) {
-					this.soldiers = 0;
-				}
-			}
+			this.stone += this.stoneMine.getProduction();
+			this.wood += this.sawmill.getProduction();
 		}
 	}
 
@@ -110,9 +100,11 @@ public class Scenario {
 		int x = e.getX();
 		int y = e.getY();
 
+		/*
 		if (this.sawmill.wasClicked(x, y)) {
 			System.out.printf("X: %d; Y: %d\n", x, y);
 		}
+		*/
 	}
 
 }

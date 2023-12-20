@@ -1,4 +1,4 @@
-package emperorsdeadline.entities;
+package emperorsdeadline.entities.buildings;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import emperorsdeadline.resources.Spritesheet;
 import emperorsdeadline.util.Util;
 
-public class Farm extends Entity {
+public class Farm extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
@@ -19,8 +19,8 @@ public class Farm extends Entity {
 	}
 
 	@Override
-	public int getResources() {
-		return Util.generateRandomNumber(2, 7);
+	public int getProduction() {
+		return Util.generateRandomNumber(2, 5);
 	}
 
 	@Override

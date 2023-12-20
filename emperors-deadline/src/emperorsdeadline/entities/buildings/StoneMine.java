@@ -1,4 +1,4 @@
-package emperorsdeadline.entities;
+package emperorsdeadline.entities.buildings;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import emperorsdeadline.resources.Spritesheet;
 import emperorsdeadline.util.Util;
 
-public class StoneMine extends Entity {
+public class StoneMine extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
@@ -19,7 +19,7 @@ public class StoneMine extends Entity {
 	}
 
 	@Override
-	public int getResources() {
+	public int getProduction() {
 		return Util.generateRandomNumber(1, 5);
 	}
 
