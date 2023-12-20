@@ -9,18 +9,20 @@ import emperorsdeadline.strings.StringError;
 
 public class Spritesheet {
 
-	private BufferedImage spritesheet;
+	private static BufferedImage spritesheet;
 
-	public Spritesheet(String path) {
-		try {
-			this.spritesheet = ImageIO.read(this.getClass().getResource(path));
-		} catch (Exception e) {
-			Game.exitWithError(StringError.ERROR_LOADING_SPRITES);
+	public static BufferedImage getSprite(int x, int y, int width, int height) {
+		if (Spritesheet.spritesheet == null) {
+			try {
+				String path = "/sprites/Tiny-Islands-by-Majadroid/tilemap-separated.png";
+
+				Spritesheet.spritesheet = ImageIO.read(Spritesheet.class.getResource(path));
+			} catch (Exception e) {
+				Game.exitWithError(StringError.ERROR_LOADING_SPRITES);
+			}
 		}
-	}
 
-	public BufferedImage getSprite(int x, int y, int width, int height) {
-		return this.spritesheet.getSubimage(x, y, width, height);
+		return Spritesheet.spritesheet.getSubimage(x, y, width, height);
 	}
 
 }

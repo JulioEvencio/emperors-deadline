@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import emperorsdeadline.Game;
+import emperorsdeadline.entities.Entity;
+import emperorsdeadline.entities.Sawmill;
 
 public class Scenario {
 
@@ -22,6 +24,8 @@ public class Scenario {
 	private int pedra;
 	private int madeira;
 
+	private Entity entity;
+
 	public Scenario() {
 		this.daysRemaining = 7;
 		this.gameCycle = 0;
@@ -34,6 +38,8 @@ public class Scenario {
 
 		this.pedra = 0;
 		this.madeira = 30;
+
+		this.entity = new Sawmill(300, 300);
 	}
 
 	public void tick() {
@@ -50,7 +56,7 @@ public class Scenario {
 			this.populacao += 1;
 
 			this.pedra += 2;
-			this.madeira += 6;
+			this.madeira += this.entity.getResources();
 		}
 	}
 
@@ -71,6 +77,8 @@ public class Scenario {
 		graphics.drawString(String.format("Madeira: %d", Math.min(this.madeira, 999)), 420, 40);
 
 		graphics.drawString(String.format("Days remaining: %d", this.daysRemaining), 550, 20);
+
+		this.entity.render(graphics);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -78,7 +86,12 @@ public class Scenario {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("Hello, world!");
+		int x = e.getX();
+		int y = e.getY();
+
+		if (this.entity.wasClicked(x, y)) {
+			System.out.printf("X: %d; Y: %d\n", x, y);
+		}
 	}
 
 }
