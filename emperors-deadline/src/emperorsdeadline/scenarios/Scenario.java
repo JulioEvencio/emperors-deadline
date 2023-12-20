@@ -11,6 +11,7 @@ import java.util.List;
 import emperorsdeadline.Game;
 import emperorsdeadline.entities.Entity;
 import emperorsdeadline.entities.buildings.Farm;
+import emperorsdeadline.entities.buildings.House;
 import emperorsdeadline.entities.buildings.Sawmill;
 import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.entities.terrain.Grass;
@@ -56,15 +57,15 @@ public class Scenario {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 4; j++) {
 				switch (Util.generateRandomNumber(1, 3)) {
-				case 1:
-					this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j)));
-					break;
-				case 2:
-					this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j)));
-					break;
-				case 3:
-					this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j)));
-					break;
+					case 1:
+						this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j)));
+						break;
+					case 2:
+						this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j)));
+						break;
+					case 3:
+						this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j)));
+						break;
 				}
 			}
 		}
@@ -90,12 +91,12 @@ public class Scenario {
 				this.soldiers += 1;
 			}
 
-			if (this.population < 999) {
-				this.population += 1;
-			}
-
 			synchronized (this.entities) {
 				this.entities.forEach(entity -> {
+					if (entity instanceof House && this.population < 999) {
+						this.population = ((House) entity).getProduction();
+					}
+					
 					if (entity instanceof Farm && this.food < 999) {
 						this.food += ((Farm) entity).getProduction();
 					}
