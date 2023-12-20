@@ -10,8 +10,8 @@ public class StoneMine extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
-	public StoneMine(int x, int y) {
-		super(x, y);
+	public StoneMine(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (StoneMine.sprite == null) {
 			StoneMine.sprite = Spritesheet.getSprite(64, 208, 16, 16);

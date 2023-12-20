@@ -10,8 +10,8 @@ public class House extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
-	public House(int x, int y) {
-		super(x, y);
+	public House(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (House.sprite == null) {
 			House.sprite = Spritesheet.getSprite(304, 208, 16, 16);

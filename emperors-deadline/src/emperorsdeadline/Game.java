@@ -151,7 +151,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (Game.gameState == GameState.MENU) {
+		if (Game.gameState == GameState.RUN) {
+			this.scenario.keyReleased(e);
+		} else if (Game.gameState == GameState.MENU) {
 			this.menu.keyReleased(e);
 		} else if (Game.gameState == GameState.TUTORIAL) {
 			this.tutorial.keyReleased(e);

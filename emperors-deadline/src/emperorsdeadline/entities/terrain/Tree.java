@@ -9,8 +9,8 @@ public class Tree extends Terrain {
 
 	private static BufferedImage sprite;
 
-	public Tree(int x, int y) {
-		super(x, y);
+	public Tree(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (Tree.sprite == null) {
 			Tree.sprite = Spritesheet.getSprite(160, 0, 16, 16);

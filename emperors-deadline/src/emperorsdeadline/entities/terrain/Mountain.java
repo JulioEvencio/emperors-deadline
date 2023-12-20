@@ -9,8 +9,8 @@ public class Mountain extends Terrain {
 
 	private static BufferedImage sprite;
 
-	public Mountain(int x, int y) {
-		super(x, y);
+	public Mountain(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (Mountain.sprite == null) {
 			Mountain.sprite = Spritesheet.getSprite(192, 0, 16, 16);

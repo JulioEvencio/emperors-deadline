@@ -10,12 +10,12 @@ public abstract class Entity {
 	private final int width;
 	private final int height;
 
-	public Entity(int x, int y) {
+	public Entity(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 
-		this.width = 16 * 5;
-		this.height = 16 * 5;
+		this.width = width;
+		this.height = height;
 	}
 
 	public int getX() {

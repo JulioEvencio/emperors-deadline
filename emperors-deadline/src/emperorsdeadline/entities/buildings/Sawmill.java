@@ -10,8 +10,8 @@ public class Sawmill extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
-	public Sawmill(int x, int y) {
-		super(x, y);
+	public Sawmill(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (Sawmill.sprite == null) {
 			Sawmill.sprite = Spritesheet.getSprite(16, 208, 16, 16);

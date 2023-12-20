@@ -9,8 +9,8 @@ public class Grass extends Terrain {
 
 	private static BufferedImage sprite;
 
-	public Grass(int x, int y) {
-		super(x, y);
+	public Grass(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (Grass.sprite == null) {
 			Grass.sprite = Spritesheet.getSprite(32, 32, 16, 16);

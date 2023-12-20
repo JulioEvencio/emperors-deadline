@@ -10,8 +10,8 @@ public class Farm extends ProductionBuilding {
 
 	private static BufferedImage sprite;
 
-	public Farm(int x, int y) {
-		super(x, y);
+	public Farm(int x, int y, int width, int height) {
+		super(x, y, width, height);
 
 		if (Farm.sprite == null) {
 			Farm.sprite = Spritesheet.getSprite(112, 208, 16, 16);
