@@ -52,15 +52,15 @@ public class World {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 4; j++) {
 				switch (Util.generateRandomNumber(1, 3)) {
-					case 1:
-						this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
-					case 2:
-						this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
-					case 3:
-						this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
+				case 1:
+					this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
+					break;
+				case 2:
+					this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
+					break;
+				case 3:
+					this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
+					break;
 				}
 			}
 		}
@@ -119,7 +119,7 @@ public class World {
 			}
 
 			if (this.gold < 999) {
-				this.gold += this.population + Util.generateRandomNumber(1, 3);
+				this.gold += this.population * Util.generateRandomNumber(1, 3);
 			}
 
 			this.entities.forEach(entity -> {
