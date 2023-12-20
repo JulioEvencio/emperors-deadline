@@ -7,9 +7,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import emperorsdeadline.Game;
+import emperorsdeadline.entities.Farm;
 import emperorsdeadline.entities.Sawmill;
 import emperorsdeadline.entities.StoneMine;
 import emperorsdeadline.strings.StringScenario;
+import emperorsdeadline.util.Util;
 
 public class Scenario {
 
@@ -27,6 +29,7 @@ public class Scenario {
 
 	private Sawmill sawmill;
 	private StoneMine stoneMine;
+	private Farm farm;
 
 	public Scenario() {
 		this.daysRemaining = 7;
@@ -41,8 +44,9 @@ public class Scenario {
 		this.stone = 0;
 		this.wood = 30;
 
-		this.sawmill = new Sawmill(300, 300);
-		this.stoneMine = new StoneMine(20, 100);
+		this.sawmill = new Sawmill(20, 100);
+		this.stoneMine = new StoneMine(120, 100);
+		this.farm = new Farm(220, 100);
 	}
 
 	public void tick() {
@@ -52,14 +56,23 @@ public class Scenario {
 			this.daysRemaining--;
 			this.gameCycle = 0;
 
-			this.gold += this.population;
-			this.soldiers += 3;
+			this.gold += (this.gold > 999) ? 999 : this.population;
+			this.soldiers += (this.soldiers > 999) ? 999 : 3; 
 
-			this.food += 10;
-			this.population += 1;
+			this.food += (this.food > 999) ? 999 : this.farm.getResources() - Util.generateRandomNumber(this.soldiers, this.soldiers * 3);
+			this.population += (this.population > 999) ? 999 : 1;
 
 			this.stone += this.stoneMine.getResources();
 			this.wood += this.sawmill.getResources();
+			
+			if (this.food < 0) {
+				this.soldiers -= this.food;
+				this.food = 0;
+				
+				if (this.soldiers < 0) {
+					this.soldiers = 0;
+				}
+			}
 		}
 	}
 
@@ -86,6 +99,7 @@ public class Scenario {
 
 		this.sawmill.render(graphics);
 		this.stoneMine.render(graphics);
+		this.farm.render(graphics);
 	}
 
 	public void keyReleased(KeyEvent e) {
