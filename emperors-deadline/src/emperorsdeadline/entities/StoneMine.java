@@ -6,26 +6,26 @@ import java.awt.image.BufferedImage;
 import emperorsdeadline.resources.Spritesheet;
 import emperorsdeadline.util.Util;
 
-public class Sawmill extends Entity {
+public class StoneMine extends Entity {
 
 	private static BufferedImage sprite;
 
-	public Sawmill(int x, int y) {
+	public StoneMine(int x, int y) {
 		super(x, y);
 
-		if (Sawmill.sprite == null) {
-			Sawmill.sprite = Spritesheet.getSprite(16, 208, 16, 16);
+		if (StoneMine.sprite == null) {
+			StoneMine.sprite = Spritesheet.getSprite(64, 208, 16, 16);
 		}
 	}
 
 	@Override
 	public int getResources() {
-		return Util.generateRandomNumber(3, 10);
+		return Util.generateRandomNumber(1, 5);
 	}
 
 	@Override
 	public void render(Graphics graphics) {
-		graphics.drawImage(Sawmill.sprite, super.getX(), super.getY(), super.getWidth(), super.getHeight(), null);
+		graphics.drawImage(StoneMine.sprite, super.getX(), super.getY(), super.getWidth(), super.getHeight(), null);
 	}
 
 }

@@ -7,8 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 import emperorsdeadline.Game;
-import emperorsdeadline.entities.Entity;
 import emperorsdeadline.entities.Sawmill;
+import emperorsdeadline.entities.StoneMine;
 import emperorsdeadline.strings.StringScenario;
 
 public class Scenario {
@@ -25,7 +25,8 @@ public class Scenario {
 	private int stone;
 	private int wood;
 
-	private Entity entity;
+	private Sawmill sawmill;
+	private StoneMine stoneMine;
 
 	public Scenario() {
 		this.daysRemaining = 7;
@@ -40,7 +41,8 @@ public class Scenario {
 		this.stone = 0;
 		this.wood = 30;
 
-		this.entity = new Sawmill(300, 300);
+		this.sawmill = new Sawmill(300, 300);
+		this.stoneMine = new StoneMine(20, 100);
 	}
 
 	public void tick() {
@@ -56,8 +58,8 @@ public class Scenario {
 			this.food += 10;
 			this.population += 1;
 
-			this.stone += 2;
-			this.wood += this.entity.getResources();
+			this.stone += this.stoneMine.getResources();
+			this.wood += this.sawmill.getResources();
 		}
 	}
 
@@ -65,7 +67,10 @@ public class Scenario {
 		graphics.setColor(Color.BLACK);
 		graphics.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
-		graphics.setColor(Color.WHITE);
+		graphics.setColor(Color.LIGHT_GRAY);
+		graphics.fillRect(0, 0, Game.WIDTH, 80);
+
+		graphics.setColor(Color.BLACK);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
 
 		graphics.drawString(String.format("%s: %d", StringScenario.GOLD, Math.min(this.gold, 999)), 20, 30);
@@ -79,7 +84,8 @@ public class Scenario {
 
 		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.daysRemaining), 530, 30);
 
-		this.entity.render(graphics);
+		this.sawmill.render(graphics);
+		this.stoneMine.render(graphics);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -90,7 +96,7 @@ public class Scenario {
 		int x = e.getX();
 		int y = e.getY();
 
-		if (this.entity.wasClicked(x, y)) {
+		if (this.sawmill.wasClicked(x, y)) {
 			System.out.printf("X: %d; Y: %d\n", x, y);
 		}
 	}
