@@ -11,8 +11,11 @@ import java.util.List;
 import emperorsdeadline.Game;
 import emperorsdeadline.entities.Entity;
 import emperorsdeadline.entities.buildings.Farm;
+import emperorsdeadline.entities.buildings.Sawmill;
+import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
+import emperorsdeadline.entities.terrain.Terrain;
 import emperorsdeadline.entities.terrain.Tree;
 import emperorsdeadline.strings.StringScenario;
 import emperorsdeadline.util.Util;
@@ -84,7 +87,7 @@ public class Scenario {
 	}
 
 	public void render(Graphics graphics) {
-		graphics.setColor(Color.BLACK);
+		graphics.setColor(new Color(50, 140, 25));
 		graphics.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
 		graphics.setColor(Color.LIGHT_GRAY);
@@ -97,14 +100,17 @@ public class Scenario {
 		graphics.drawString(String.format("%s: %d", StringScenario.SOLDIERS, Math.min(this.soldiers, 999)), 20, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.FOOD, Math.min(this.food, 999)), 200, 30);
-		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.population, 999)), 200, 50);
+		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.population, 999)), 200,
+				50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.STONE, Math.min(this.stone, 999)), 400, 30);
 		graphics.drawString(String.format("%s: %d", StringScenario.WOOD, Math.min(this.wood, 999)), 400, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.daysRemaining), 530, 30);
 
-		this.entities.forEach(entity -> entity.render(graphics));
+		synchronized (this.entities) {
+			this.entities.forEach(entity -> entity.render(graphics));
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -112,26 +118,36 @@ public class Scenario {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
+		synchronized (this.entities) {
+			int x = e.getX();
+			int y = e.getY();
 
-		Entity entityClick = null;
+			Entity entityClick = null;
 
-		for (Entity entity : this.entities) {
-			if (entity != null && entity.wasClicked(x, y)) {
-				entityClick = entity;
+			for (Entity entity : this.entities) {
+				if (entity instanceof Terrain && entity.wasClicked(x, y)) {
+					entityClick = entity;
+				}
+			}
+
+			if (entityClick != null) {
+				this.entities.remove(entityClick);
+
+				if (entityClick instanceof Grass) {
+					Farm farm = new Farm(entityClick.getX(), entityClick.getY());
+
+					this.entities.add(farm);
+				} else if (entityClick instanceof Tree) {
+					Sawmill sawmill = new Sawmill(entityClick.getX(), entityClick.getY());
+
+					this.entities.add(sawmill);
+				} else if (entityClick instanceof Mountain) {
+					StoneMine stoneMine = new StoneMine(entityClick.getX(), entityClick.getY());
+
+					this.entities.add(stoneMine);
+				}
 			}
 		}
-
-		if (entityClick != null) {
-			this.entities.remove(entityClick);
-		}
-
-		if (entityClick instanceof Grass) {
-			Farm farm = new Farm(entityClick.getX(), entityClick.getY());
-			this.entities.add(farm);
-		}
-
 	}
 
 }
