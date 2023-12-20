@@ -52,15 +52,15 @@ public class World {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 4; j++) {
 				switch (Util.generateRandomNumber(1, 3)) {
-				case 1:
-					this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
-					break;
-				case 2:
-					this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
-					break;
-				case 3:
-					this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
-					break;
+					case 1:
+						this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
+						break;
+					case 2:
+						this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
+						break;
+					case 3:
+						this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
+						break;
 				}
 			}
 		}
@@ -119,11 +119,7 @@ public class World {
 			}
 
 			if (this.gold < 999) {
-				this.gold += this.population;
-			}
-
-			if (this.soldiers < 999) {
-				this.soldiers += 1;
+				this.gold += this.population + Util.generateRandomNumber(1, 3);
 			}
 
 			this.entities.forEach(entity -> {
@@ -150,15 +146,24 @@ public class World {
 		graphics.setColor(new Color(50, 140, 25));
 		graphics.fillRect(0, 80, Game.WIDTH, Game.HEIGHT - 80);
 
-		this.entities.forEach(entity -> entity.render(graphics));
+		this.entities.forEach(entity -> {
+			entity.render(graphics);
+
+			if (entity.wasClicked(Game.getMouseX(), Game.getMouseY())) {
+				graphics.setColor(Color.BLUE);
+				graphics.drawRect(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
+			}
+		});
 
 		this.systemDayNight(graphics);
 	}
 
 	private void systemDayNight(Graphics graphics) {
 		int timeNow = (this.gameTime - 13 + 24) % 24;
+
 		double normalizedTime = (double) timeNow / (24 - 1);
 		double intensity = Math.sin(normalizedTime * Math.PI);
+
 		int alpha = (int) (intensity * 255);
 
 		if (alpha > 200) {

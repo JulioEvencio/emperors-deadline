@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -20,7 +21,7 @@ import emperorsdeadline.screens.Menu;
 import emperorsdeadline.screens.Tutorial;
 import emperorsdeadline.strings.StringError;
 
-public class Game extends Canvas implements Runnable, KeyListener, MouseListener {
+public class Game extends Canvas implements Runnable, KeyListener, MouseListener, MouseMotionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +32,9 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int HEIGHT = 480;
 
 	public static GameState gameState;
+
+	private static int mouseX;
+	private static int mouseY;
 
 	private int fps;
 	private boolean showFPS;
@@ -46,9 +50,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public Game() {
 		this.addKeyListener(this);
 		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
 		this.setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
 
 		Game.gameState = GameState.MENU;
+		Game.mouseX = 0;
+		Game.mouseY = 0;
 		this.renderer = new BufferedImage(Game.WIDTH, Game.HEIGHT, BufferedImage.TYPE_INT_RGB);
 
 		this.menu = new Menu();
@@ -56,6 +63,14 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.credits = new Credits();
 
 		this.scenario = new Scenario();
+	}
+
+	public static int getMouseX() {
+		return Game.mouseX;
+	}
+
+	public static int getMouseY() {
+		return Game.mouseY;
 	}
 
 	private void tick() {
@@ -195,6 +210,19 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public void mouseReleased(MouseEvent e) {
 		if (Game.gameState == GameState.RUN) {
 			this.scenario.mouseReleased(e);
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// Code
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		if (Game.gameState == GameState.RUN) {
+			Game.mouseX = e.getX();
+			Game.mouseY = e.getY();
 		}
 	}
 
