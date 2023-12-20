@@ -9,20 +9,21 @@ import java.awt.event.MouseEvent;
 import emperorsdeadline.Game;
 import emperorsdeadline.entities.Entity;
 import emperorsdeadline.entities.Sawmill;
+import emperorsdeadline.strings.StringScenario;
 
 public class Scenario {
 
 	private int daysRemaining;
 	private int gameCycle;
 
-	private int ouro;
-	private int soldados;
+	private int gold;
+	private int soldiers;
 
-	private int comida;
-	private int populacao;
+	private int food;
+	private int population;
 
-	private int pedra;
-	private int madeira;
+	private int stone;
+	private int wood;
 
 	private Entity entity;
 
@@ -30,14 +31,14 @@ public class Scenario {
 		this.daysRemaining = 7;
 		this.gameCycle = 0;
 
-		this.ouro = 10;
-		this.soldados = 0;
+		this.gold = 10;
+		this.soldiers = 0;
 
-		this.comida = 10;
-		this.populacao = 10;
+		this.food = 10;
+		this.population = 10;
 
-		this.pedra = 0;
-		this.madeira = 30;
+		this.stone = 0;
+		this.wood = 30;
 
 		this.entity = new Sawmill(300, 300);
 	}
@@ -49,14 +50,14 @@ public class Scenario {
 			this.daysRemaining--;
 			this.gameCycle = 0;
 
-			this.ouro += this.populacao;
-			this.soldados += 3;
+			this.gold += this.population;
+			this.soldiers += 3;
 
-			this.comida += 10;
-			this.populacao += 1;
+			this.food += 10;
+			this.population += 1;
 
-			this.pedra += 2;
-			this.madeira += this.entity.getResources();
+			this.stone += 2;
+			this.wood += this.entity.getResources();
 		}
 	}
 
@@ -67,16 +68,16 @@ public class Scenario {
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
 
-		graphics.drawString(String.format("Ouro: %d", Math.min(this.ouro, 999)), 20, 20);
-		graphics.drawString(String.format("Soldados: %d", Math.min(this.soldados, 999)), 20, 40);
+		graphics.drawString(String.format("%s: %d", StringScenario.GOLD, Math.min(this.gold, 999)), 20, 30);
+		graphics.drawString(String.format("%s: %d", StringScenario.SOLDIERS, Math.min(this.soldiers, 999)), 20, 50);
 
-		graphics.drawString(String.format("Comida: %d", Math.min(this.comida, 999)), 220, 20);
-		graphics.drawString(String.format("População: %d", Math.min(this.populacao, 999)), 220, 40);
+		graphics.drawString(String.format("%s: %d", StringScenario.FOOD, Math.min(this.food, 999)), 200, 30);
+		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.population, 999)), 200, 50);
 
-		graphics.drawString(String.format("Pedra: %d", Math.min(this.pedra, 999)), 420, 20);
-		graphics.drawString(String.format("Madeira: %d", Math.min(this.madeira, 999)), 420, 40);
+		graphics.drawString(String.format("%s: %d", StringScenario.STONE, Math.min(this.stone, 999)), 400, 30);
+		graphics.drawString(String.format("%s: %d", StringScenario.WOOD, Math.min(this.wood, 999)), 400, 50);
 
-		graphics.drawString(String.format("Days remaining: %d", this.daysRemaining), 550, 20);
+		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.daysRemaining), 530, 30);
 
 		this.entity.render(graphics);
 	}
