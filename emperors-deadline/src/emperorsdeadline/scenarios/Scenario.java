@@ -23,6 +23,7 @@ import emperorsdeadline.util.Util;
 public class Scenario {
 
 	private int daysRemaining;
+	private int gameTime;
 	private int gameCycle;
 
 	private int gold;
@@ -38,6 +39,7 @@ public class Scenario {
 
 	public Scenario() {
 		this.daysRemaining = 7;
+		this.gameTime = 0;
 		this.gameCycle = 0;
 
 		this.gold = 0;
@@ -71,18 +73,42 @@ public class Scenario {
 	public void tick() {
 		this.gameCycle++;
 
-		if (this.gameCycle >= 1000) {
-			this.daysRemaining--;
+		if (this.gameCycle >= 100) {
+			this.gameTime++;
 			this.gameCycle = 0;
 
-			// this.gold += (this.gold > 999) ? 999 : this.population;
-			// this.soldiers += (this.soldiers > 999) ? 999 : 3;
+			if (this.gameTime >= 24) {
+				this.gameTime = 0;
+				this.daysRemaining--;
+			}
 
-			// this.food += this.farm.getProduction();
-			// this.population += (this.population > 999) ? 999 : 1;
+			if (this.gold < 999) {
+				this.gold += this.population;
+			}
 
-			// this.stone += this.stoneMine.getProduction();
-			// this.wood += this.sawmill.getProduction();
+			if (this.soldiers < 999) {
+				this.soldiers += 1;
+			}
+
+			if (this.population < 999) {
+				this.population += 1;
+			}
+
+			synchronized (this.entities) {
+				this.entities.forEach(entity -> {
+					if (entity instanceof Farm && this.food < 999) {
+						this.food += ((Farm) entity).getProduction();
+					}
+
+					if (entity instanceof Sawmill && this.wood < 999) {
+						this.wood += ((Sawmill) entity).getProduction();
+					}
+
+					if (entity instanceof StoneMine && this.stone < 999) {
+						this.stone += ((StoneMine) entity).getProduction();
+					}
+				});
+			}
 		}
 	}
 
@@ -100,17 +126,33 @@ public class Scenario {
 		graphics.drawString(String.format("%s: %d", StringScenario.SOLDIERS, Math.min(this.soldiers, 999)), 20, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.FOOD, Math.min(this.food, 999)), 200, 30);
-		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.population, 999)), 200,
-				50);
+		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.population, 999)), 200, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.STONE, Math.min(this.stone, 999)), 400, 30);
 		graphics.drawString(String.format("%s: %d", StringScenario.WOOD, Math.min(this.wood, 999)), 400, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.daysRemaining), 530, 30);
+		graphics.drawString(String.format("%s: %02d:00", StringScenario.TIME, this.gameTime), 530, 50);
 
 		synchronized (this.entities) {
 			this.entities.forEach(entity -> entity.render(graphics));
 		}
+
+		this.systemDayNight(graphics);
+	}
+
+	private void systemDayNight(Graphics graphics) {
+		int timeNow = (this.gameTime - 13 + 24) % 24;
+		double normalizedTime = (double) timeNow / (24 - 1);
+		double intensity = Math.sin(normalizedTime * Math.PI);
+		int alpha = (int) (intensity * 255);
+
+		if (alpha > 200) {
+			alpha = 200;
+		}
+
+		graphics.setColor(new Color(0, 0, 0, alpha));
+		graphics.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 	}
 
 	public void keyReleased(KeyEvent e) {

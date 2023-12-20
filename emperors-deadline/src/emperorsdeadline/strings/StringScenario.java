@@ -12,5 +12,6 @@ public class StringScenario {
 	public static String WOOD = "Wood";
 
 	public static String DAYS_REMAINING = "Days remaining";
+	public static String TIME = "Time";
 
 }
