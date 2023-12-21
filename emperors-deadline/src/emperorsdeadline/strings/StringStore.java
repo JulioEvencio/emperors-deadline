@@ -13,4 +13,8 @@ public class StringStore {
 		return String.format("House: %d Gold and %d Wood", gold, wood);
 	}
 
+	public static String getPriceSawmill(int gold) {
+		return String.format("Sawmill: %d Gold", gold);
+	}
+
 }

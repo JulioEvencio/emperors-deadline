@@ -16,6 +16,7 @@ import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
 import emperorsdeadline.entities.terrain.Tree;
 import emperorsdeadline.scenarios.stores.StoreGrass;
+import emperorsdeadline.scenarios.stores.StoreTree;
 import emperorsdeadline.util.Util;
 
 public class World {
@@ -43,6 +44,7 @@ public class World {
 	private final List<Entity> entities;
 	
 	private StoreGrass storeGrass;
+	private StoreTree storeTree;
 
 	public World() {
 		this.worldState = WorldState.WORLD;
@@ -55,14 +57,14 @@ public class World {
 		this.gameTime = 0;
 		this.gameCycle = 0;
 
-		this.gold = 0;
-		this.soldiers = 0;
+		this.gold = 100;
+		this.soldiers = 100;
 
-		this.food = 0;
-		this.population = 0;
+		this.food = 100;
+		this.population = 100;
 
-		this.stone = 0;
-		this.wood = 0;
+		this.stone = 100;
+		this.wood = 100;
 
 		this.entities = new ArrayList<>();
 
@@ -83,6 +85,7 @@ public class World {
 		}
 		
 		this.storeGrass = new StoreGrass(this);
+		this.storeTree = new StoreTree(this);
 	}
 
 	public int getDaysRemaining() {
@@ -150,6 +153,7 @@ public class World {
 					this.storeGrass = new StoreGrass(this);
 					this.worldState = WorldState.STORE_GRASS;
 				} else if (entity instanceof Tree) {
+					this.storeTree = new StoreTree(this);
 					this.worldState = WorldState.STORE_TREE;
 				} else if (entity instanceof Mountain) {
 					this.worldState = WorldState.STORE_MOUNTAIN;
@@ -206,7 +210,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_GRASS) {
 			this.storeGrass.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_TREE) {
-			System.out.println("Sawmill");
+			this.storeTree.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			System.out.println("Stone Mine");
 		}
@@ -250,7 +254,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_GRASS) {
 			this.storeGrass.render(graphics);
 		} else if (this.worldState == WorldState.STORE_TREE) {
-			System.out.println("Sawmill");
+			this.storeTree.render(graphics);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			System.out.println("Stone Mine");
 		}
@@ -264,7 +268,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_GRASS) {
 			this.storeGrass.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_TREE) {
-			System.out.println("Sawmill");
+			this.storeTree.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			System.out.println("Stone Mine");
 		}
