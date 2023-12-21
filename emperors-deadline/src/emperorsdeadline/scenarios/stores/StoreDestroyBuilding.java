@@ -35,7 +35,7 @@ public class StoreDestroyBuilding extends Store {
 	protected void mouseClick(Entity entity) {
 		if (this.backButton.wasClicked(super.clickX, super.clickY)) {
 			super.world.worldState = WorldState.WORLD;
-		} else if (!this.destroyBuilding) {
+		} else if (!this.destroyBuilding && this.destroyButton.wasClicked(super.clickX, super.clickY)) {
 			this.destroyBuilding = true;
 
 			Grass grass = new Grass(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
