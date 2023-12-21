@@ -16,6 +16,7 @@ import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
 import emperorsdeadline.entities.terrain.Tree;
 import emperorsdeadline.scenarios.stores.StoreGrass;
+import emperorsdeadline.scenarios.stores.StoreMountain;
 import emperorsdeadline.scenarios.stores.StoreTree;
 import emperorsdeadline.util.Util;
 
@@ -45,6 +46,7 @@ public class World {
 	
 	private StoreGrass storeGrass;
 	private StoreTree storeTree;
+	private StoreMountain storeMountain;
 
 	public World() {
 		this.worldState = WorldState.WORLD;
@@ -86,6 +88,7 @@ public class World {
 		
 		this.storeGrass = new StoreGrass(this);
 		this.storeTree = new StoreTree(this);
+		this.storeMountain = new StoreMountain(this);
 	}
 
 	public int getDaysRemaining() {
@@ -156,6 +159,7 @@ public class World {
 					this.storeTree = new StoreTree(this);
 					this.worldState = WorldState.STORE_TREE;
 				} else if (entity instanceof Mountain) {
+					this.storeMountain = new StoreMountain(this);
 					this.worldState = WorldState.STORE_MOUNTAIN;
 				}
 			}
@@ -212,7 +216,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_TREE) {
 			this.storeTree.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
-			System.out.println("Stone Mine");
+			this.storeMountain.tick(this.entitySelected);
 		}
 	}
 	
@@ -256,7 +260,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_TREE) {
 			this.storeTree.render(graphics);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
-			System.out.println("Stone Mine");
+			this.storeMountain.render(graphics);
 		}
 	}
 
@@ -270,7 +274,7 @@ public class World {
 		} else if (this.worldState == WorldState.STORE_TREE) {
 			this.storeTree.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
-			System.out.println("Stone Mine");
+			this.storeMountain.mouseReleased(e);
 		}
 	}
 	

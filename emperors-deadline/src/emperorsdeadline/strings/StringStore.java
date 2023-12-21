@@ -17,4 +17,12 @@ public class StringStore {
 		return String.format("Sawmill: %d Gold", gold);
 	}
 
+	public static String getPriceStoneMine(int gold, int wood) {
+		return String.format("Stone Mine: %d Gold and %d Wood", gold, wood);
+	}
+
+	public static String getPriceBarracks(int gold, int wood, int stone) {
+		return String.format("Barracks: %d Gold, %d Wood and %d stone", gold, wood, stone);
+	}
+
 }
