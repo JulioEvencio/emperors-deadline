@@ -24,15 +24,11 @@ public abstract class Store {
 
 	protected abstract void mouseClick(Entity entity);
 
-	protected abstract void tickIntern(Entity entity);
-
 	public void tick(Entity entity) {
 		if (this.hasClick) {
 			this.mouseClick(entity);
 
 			this.hasClick = false;
-		} else {
-			this.tickIntern(entity);
 		}
 	}
 
