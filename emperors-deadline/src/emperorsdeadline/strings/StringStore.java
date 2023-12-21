@@ -5,6 +5,9 @@ public class StringStore {
 	public static String PURCHASED = "Purchased";
 	public static String INSUFFICIENT_RESOURCES = "Insufficient resources";
 
+	public static String DO_YOU_WANT_TO_DESTROY_THE_BUILDING = "Do you want to destroy the building?";
+	public static String THE_BUILDING_WAS_DESTROYED = "The building was destroyed";
+
 	public static String getPriceFarm(int gold, int wood) {
 		return String.format("Farm: %d Gold and %d Wood", gold, wood);
 	}

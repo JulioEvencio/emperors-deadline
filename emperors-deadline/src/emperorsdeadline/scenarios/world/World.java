@@ -15,6 +15,7 @@ import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
 import emperorsdeadline.entities.terrain.Tree;
+import emperorsdeadline.scenarios.stores.StoreDestroyBuilding;
 import emperorsdeadline.scenarios.stores.StoreGrass;
 import emperorsdeadline.scenarios.stores.StoreMountain;
 import emperorsdeadline.scenarios.stores.StoreTree;
@@ -47,6 +48,7 @@ public class World {
 	private StoreGrass storeGrass;
 	private StoreTree storeTree;
 	private StoreMountain storeMountain;
+	private StoreDestroyBuilding storeDestroyBuilding;
 
 	public World() {
 		this.worldState = WorldState.WORLD;
@@ -89,6 +91,7 @@ public class World {
 		this.storeGrass = new StoreGrass(this);
 		this.storeTree = new StoreTree(this);
 		this.storeMountain = new StoreMountain(this);
+		this.storeDestroyBuilding = new StoreDestroyBuilding(this);
 	}
 
 	public int getDaysRemaining() {
@@ -161,6 +164,9 @@ public class World {
 				} else if (entity instanceof Mountain) {
 					this.storeMountain = new StoreMountain(this);
 					this.worldState = WorldState.STORE_MOUNTAIN;
+				} else {
+					this.storeDestroyBuilding = new StoreDestroyBuilding(this);
+					this.worldState = WorldState.STORE_DESTROY_BUILDING;
 				}
 			}
 		});
@@ -217,6 +223,8 @@ public class World {
 			this.storeTree.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.tick(this.entitySelected);
+		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
+			this.storeDestroyBuilding.tick(this.entitySelected);
 		}
 	}
 	
@@ -261,6 +269,8 @@ public class World {
 			this.storeTree.render(graphics);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.render(graphics);
+		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
+			this.storeDestroyBuilding.render(graphics);
 		}
 	}
 
@@ -275,6 +285,8 @@ public class World {
 			this.storeTree.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.mouseReleased(e);
+		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
+			this.storeDestroyBuilding.mouseReleased(e);
 		}
 	}
 	

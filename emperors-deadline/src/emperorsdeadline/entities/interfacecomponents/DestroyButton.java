@@ -7,15 +7,15 @@ import java.awt.Graphics;
 import emperorsdeadline.entities.Entity;
 import emperorsdeadline.strings.StringInterfaceComponents;
 
-public class DeleteButton extends Entity {
+public class DestroyButton extends Entity {
 
-	public DeleteButton(int x, int y) {
-		super(x, y, 75, 20);
+	public DestroyButton(int x, int y) {
+		super(x, y, 126, 20);
 	}
 
 	@Override
 	public void render(Graphics graphics) {
-		graphics.setColor(Color.GREEN);
+		graphics.setColor(Color.RED);
 		graphics.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
 
 		graphics.setColor(Color.BLACK);
