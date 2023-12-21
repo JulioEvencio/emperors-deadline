@@ -4,18 +4,20 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import emperorsdeadline.scenarios.world.World;
+
 public class Scenario {
 
 	private final World world;
 	private final Info info;
-	private final Store store;
+	private final OldStore store;
 
 	protected static ScenarioState scenarioState;
 
 	public Scenario() {
 		this.world = new World();
 		this.info = new Info(this.world);
-		this.store = new Store(this.world);
+		this.store = new OldStore(this.world);
 
 		Scenario.scenarioState = ScenarioState.WORLD;
 	}
@@ -46,8 +48,8 @@ public class Scenario {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (Scenario.scenarioState == ScenarioState.STORE) {
-			this.store.mouseReleased(e);
+		if (Scenario.scenarioState == ScenarioState.WORLD) {
+			this.world.mouseReleased(e);
 		}
 	}
 

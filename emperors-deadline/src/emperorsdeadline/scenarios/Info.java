@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import emperorsdeadline.Game;
+import emperorsdeadline.scenarios.world.World;
 import emperorsdeadline.strings.StringScenario;
 
 public class Info {

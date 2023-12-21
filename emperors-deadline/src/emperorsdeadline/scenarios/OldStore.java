@@ -12,8 +12,9 @@ import emperorsdeadline.entities.buildings.Farm;
 import emperorsdeadline.entities.interfacecomponents.BuyButton;
 import emperorsdeadline.entities.interfacecomponents.DeleteButton;
 import emperorsdeadline.entities.terrain.Grass;
+import emperorsdeadline.scenarios.world.World;
 
-public class Store {
+public class OldStore {
 
 	private final World world;
 
@@ -23,7 +24,7 @@ public class Store {
 	private int clickY;
 	private boolean hasClick;
 
-	public Store(World world) {
+	public OldStore(World world) {
 		this.world = world;
 
 		this.interfaceComponents = new ArrayList<>();

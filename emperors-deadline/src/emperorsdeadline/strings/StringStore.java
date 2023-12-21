@@ -4,5 +4,6 @@ public class StringStore {
 
 	public static String PURCHASE = "Purchase";
 	public static String DESTROY = "Destroy";
+	public static String BACK = "Back";
 
 }
