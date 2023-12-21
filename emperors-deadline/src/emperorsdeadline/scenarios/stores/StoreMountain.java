@@ -37,14 +37,14 @@ public class StoreMountain extends Store {
 
 		this.buyStoneMine = new BuyButton(100, 210);
 
-		this.stoneMineGold = 15;
-		this.stoneMineWood = 15;
+		this.stoneMineGold = 150;
+		this.stoneMineWood = 150;
 
 		this.buyBarracks = new BuyButton(100, 310);
 
-		this.barracksGold = 25;
-		this.barracksWood = 25;
-		this.barracksStone = 25;
+		this.barracksGold = 250;
+		this.barracksWood = 250;
+		this.barracksStone = 250;
 
 		this.backButton = new BackButton(320, 400);
 

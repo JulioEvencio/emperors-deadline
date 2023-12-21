@@ -36,13 +36,13 @@ public class StoreGrass extends Store {
 
 		this.buyFarm = new BuyButton(100, 210);
 
-		this.farmGold = 3;
-		this.farmWood = 5;
+		this.farmGold = 30;
+		this.farmWood = 50;
 
 		this.buyHouse = new BuyButton(100, 310);
 
-		this.houseGold = 5;
-		this.houseWood = 8;
+		this.houseGold = 50;
+		this.houseWood = 80;
 
 		this.backButton = new BackButton(320, 400);
 

@@ -20,7 +20,7 @@ public class Farm extends ProductionBuilding {
 
 	@Override
 	public int getProduction() {
-		return Util.generateRandomNumber(2, 5);
+		return Util.generateRandomNumber(5, 15);
 	}
 
 	@Override

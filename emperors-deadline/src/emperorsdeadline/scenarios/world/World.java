@@ -61,14 +61,14 @@ public class World {
 		this.gameTime = 0;
 		this.gameCycle = 0;
 
-		this.gold = 100;
-		this.soldiers = 100;
+		this.gold = 180;
+		this.soldiers = 0;
 
-		this.food = 100;
-		this.population = 100;
+		this.food = 0;
+		this.population = 0;
 
-		this.stone = 100;
-		this.wood = 100;
+		this.stone = 0;
+		this.wood = 0;
 
 		this.entities = new ArrayList<>();
 
@@ -184,13 +184,19 @@ public class World {
 				this.daysRemaining--;
 			}
 
-			if (this.gold < 999) {
-				this.gold += this.population * Util.generateRandomNumber(1, 3);
-			}
-
 			this.entities.forEach(entity -> {
-				if (entity instanceof House && this.population < 999) {
-					this.population += ((House) entity).getProduction();
+				if (entity instanceof House) {
+					if (this.population < 999) {
+						int newPopulation = ((House) entity).getProduction();
+						
+						if ((this.food - newPopulation) >= 0) {
+							this.population += newPopulation;
+						}
+					}
+					
+					if (this.gold < 999 && this.population > 0) {
+						this.gold += ((House) entity).getProduction();
+					}
 				}
 
 				if (entity instanceof Farm && this.food < 999) {
@@ -205,6 +211,17 @@ public class World {
 					this.stone += ((StoneMine) entity).getProduction();
 				}
 			});
+			
+			this.food -= this.population;
+			
+			if (this.food < 0) {
+				this.food = 0;
+				this.population -= 5;
+				
+				if (this.population < 0) {
+					this.population = 0;
+				}
+			}
 		}
 	}
 

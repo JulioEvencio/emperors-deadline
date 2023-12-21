@@ -41,17 +41,17 @@ public class StoreTree extends Store {
 
 		this.buyFarm = new BuyButton(100, 210);
 
-		this.farmGold = 3;
-		this.farmWood = 5;
+		this.farmGold = 45;
+		this.farmWood = 70;
 
 		this.buyHouse = new BuyButton(100, 310);
 
-		this.houseGold = 5;
-		this.houseWood = 8;
+		this.houseGold = 50;
+		this.houseWood = 100;
 
 		this.buySawmill = new BuyButton(400, 210);
 
-		this.sawmillGold = 10;
+		this.sawmillGold = 100;
 
 		this.backButton = new BackButton(320, 400);
 
