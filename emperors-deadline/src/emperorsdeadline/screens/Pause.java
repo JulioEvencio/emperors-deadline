@@ -7,10 +7,13 @@ import java.awt.event.KeyEvent;
 
 import emperorsdeadline.Game;
 import emperorsdeadline.GameState;
+import emperorsdeadline.scenarios.Scenario;
+import emperorsdeadline.scenarios.ScenarioState;
 import emperorsdeadline.strings.StringGame;
+import emperorsdeadline.strings.StringPause;
 import emperorsdeadline.strings.StringScreen;
 
-public class Menu {
+public class Pause {
 
 	private final String[] options;
 
@@ -21,8 +24,8 @@ public class Menu {
 	private boolean down;
 	private boolean enter;
 
-	public Menu() {
-		this.options = new String[4];
+	public Pause() {
+		this.options = new String[3];
 
 		this.maxOption = this.options.length - 1;
 		this.currentOption = 0;
@@ -31,10 +34,9 @@ public class Menu {
 		this.down = false;
 		this.enter = false;
 
-		this.options[0] = StringScreen.NEW_GAME;
-		this.options[1] = StringScreen.TUTORIAL;
-		this.options[2] = StringScreen.CREDITS;
-		this.options[3] = StringScreen.EXIT;
+		this.options[0] = StringPause.RESUME;
+		this.options[1] = StringPause.MENU;
+		this.options[2] = StringScreen.EXIT;
 	}
 
 	public void tick() {
@@ -60,13 +62,10 @@ public class Menu {
 			this.enter = false;
 
 			if (this.currentOption == 0) {
-				Game.newGame();
-				Game.gameState = GameState.RUN;
+				Scenario.scenarioState = ScenarioState.WORLD;
 			} else if (this.currentOption == 1) {
-				Game.gameState = GameState.TUTORIAL;
+				Game.gameState = GameState.MENU;
 			} else if (this.currentOption == 2) {
-				Game.gameState = GameState.CREDITS;
-			} else if (this.currentOption == 3) {
 				Game.gameState = GameState.EXIT;
 			}
 		}
@@ -86,7 +85,6 @@ public class Menu {
 		graphics.drawString(options[0], Game.WIDTH / 2 - 50, 150);
 		graphics.drawString(options[1], Game.WIDTH / 2 - 50, 200);
 		graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
-		graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 
 		graphics.setColor(Color.YELLOW);
 
@@ -99,9 +97,6 @@ public class Menu {
 		} else if (currentOption == 2) {
 			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 250);
 			graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
-		} else if (currentOption == 3) {
-			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 300);
-			graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 		}
 
 		graphics.setColor(Color.CYAN);

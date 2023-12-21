@@ -45,7 +45,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private final Tutorial tutorial;
 	private final Credits credits;
 
-	private Scenario scenario;
+	private static Scenario scenario;
 
 	public Game() {
 		this.addKeyListener(this);
@@ -62,7 +62,11 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.tutorial = new Tutorial();
 		this.credits = new Credits();
 
-		this.scenario = new Scenario();
+		Game.newGame();
+	}
+
+	public static void newGame() {
+		Game.scenario = new Scenario();
 	}
 
 	public static int getMouseX() {
@@ -75,7 +79,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 	private void tick() {
 		if (Game.gameState == GameState.RUN) {
-			this.scenario.tick();
+			Game.scenario.tick();
 		} else if (Game.gameState == GameState.MENU) {
 			this.menu.tick();
 		} else if (Game.gameState == GameState.EXIT) {
@@ -97,7 +101,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		render.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
 		if (Game.gameState == GameState.RUN) {
-			this.scenario.render(render);
+			Game.scenario.render(render);
 		}
 
 		render.dispose();
@@ -167,7 +171,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (Game.gameState == GameState.RUN) {
-			// Pause
+			Game.scenario.keyReleased(e);
 		} else if (Game.gameState == GameState.MENU) {
 			this.menu.keyReleased(e);
 		} else if (Game.gameState == GameState.TUTORIAL) {
@@ -209,7 +213,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (Game.gameState == GameState.RUN) {
-			this.scenario.mouseReleased(e);
+			Game.scenario.mouseReleased(e);
 		}
 	}
 
