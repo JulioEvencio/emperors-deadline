@@ -12,6 +12,8 @@ import emperorsdeadline.entities.interfacecomponents.BackButton;
 import emperorsdeadline.entities.interfacecomponents.BuyButton;
 import emperorsdeadline.scenarios.world.World;
 import emperorsdeadline.scenarios.world.WorldState;
+import emperorsdeadline.strings.StringScenario;
+import emperorsdeadline.strings.StringStore;
 
 public class StoreGrass extends Store {
 
@@ -66,8 +68,8 @@ public class StoreGrass extends Store {
 		graphics.setColor(Color.BLACK);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
 
-		graphics.drawString("Farm: 8 gold", 100, 200);
-		graphics.drawString("House: 5 gold", 100, 300);
+		graphics.drawString(String.format("%s: 8 %s", StringStore.FARM, StringScenario.GOLD), 100, 200);
+		graphics.drawString(String.format("%s: 5 %s", StringStore.HOUSE, StringScenario.GOLD), 100, 300);
 
 		if (!this.purchased) {
 			this.buyFarm.render(graphics);
@@ -75,7 +77,7 @@ public class StoreGrass extends Store {
 		} else {
 			graphics.setColor(Color.GREEN);
 			graphics.setFont(new Font("arial", Font.BOLD, 20));
-			graphics.drawString("Purchased", 300, 350);
+			graphics.drawString(StringStore.PURCHASED, 300, 350);
 		}
 
 		this.backButton.render(graphics);

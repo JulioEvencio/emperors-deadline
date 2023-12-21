@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import emperorsdeadline.entities.Entity;
-import emperorsdeadline.strings.StringStore;
+import emperorsdeadline.strings.StringInterfaceComponents;
 
 public class DeleteButton extends Entity {
 
@@ -20,7 +20,7 @@ public class DeleteButton extends Entity {
 
 		graphics.setColor(Color.BLACK);
 		graphics.setFont(new Font("arial", Font.BOLD, 12));
-		graphics.drawString(StringStore.DESTROY, super.getX() + 5, super.getY() + 15);
+		graphics.drawString(StringInterfaceComponents.DESTROY, super.getX() + 5, super.getY() + 15);
 
 		graphics.setColor(Color.BLACK);
 		graphics.drawRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());

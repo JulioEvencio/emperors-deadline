@@ -100,6 +100,10 @@ public class World {
 	public int getGold() {
 		return gold;
 	}
+	
+	public void removeGold(int value) {
+		this.gold -= value;
+	}
 
 	public int getSoldiers() {
 		return soldiers;
@@ -112,13 +116,25 @@ public class World {
 	public int getPopulation() {
 		return population;
 	}
+	
+	public void removePopulation(int value) {
+		this.population -= value;
+	}
 
 	public int getStone() {
 		return stone;
 	}
+	
+	public void removeStone(int value) {
+		this.stone -= value;
+	}
 
 	public int getWood() {
 		return wood;
+	}
+	
+	public void removeWood(int value) {
+		this.wood -= value;
 	}
 
 	public List<Entity> getEntities() {
