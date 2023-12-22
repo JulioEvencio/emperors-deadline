@@ -11,60 +11,39 @@ import emperorsdeadline.strings.StringError;
 
 public class Audio {
 
-	private final String path;
 	private Clip clip;
 
-	public Audio(String path) {
-		this.path = path;
-	}
-
-	public void audioPlay() {
-		if (this.clip != null && !this.clip.isRunning()) {
-			this.clip.setFramePosition(0);
-			this.clip.start();
-		}
-	}
-
-	public void audioStop() {
-		if (this.clip != null && this.clip.isRunning()) {
-			this.clip.stop();
-			this.clip.setFramePosition(0);
-		}
-	}
-
-	private void loadClip() {
+	public Audio(String fileName) {
 		try {
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getResource(this.path));
-			AudioFormat format = audioInputStream.getFormat();
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getResource(fileName));
 
+			AudioFormat format = audioInputStream.getFormat();
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
 
 			if (!AudioSystem.isLineSupported(info)) {
 				AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, format.getSampleRate(), 16, format.getChannels(), format.getChannels() * 2, format.getSampleRate(), false);
 
 				audioInputStream = AudioSystem.getAudioInputStream(targetFormat, audioInputStream);
-				format = audioInputStream.getFormat();
-				info = new DataLine.Info(Clip.class, format);
 			}
 
-			this.clip = (Clip) AudioSystem.getLine(info);
+			this.clip = AudioSystem.getClip();
 			this.clip.open(audioInputStream);
 		} catch (Exception e) {
 			Game.exitWithError(StringError.ERROR_LOADING_AUDIO);
 		}
 	}
 
-	private class SoundThread extends Thread {
-		@Override
-		public void run() {
-			loadClip();
-			audioStop();
+	public void play() {
+		if (!this.clip.isRunning()) {
+			this.clip.setFramePosition(0);
+			this.clip.start();
 		}
 	}
 
-	public void start() {
-		SoundThread soundThread = new SoundThread();
-		soundThread.start();
+	public void stop() {
+		if (this.clip.isRunning()) {
+			this.clip.stop();
+		}
 	}
 
 }
