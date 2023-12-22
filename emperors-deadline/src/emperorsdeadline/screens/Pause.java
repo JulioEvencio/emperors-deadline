@@ -101,7 +101,7 @@ public class Pause {
 
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
-		graphics.drawString(StringScreen.NAVIGATE_THE_MENU, Game.WIDTH / 2 - 180, 414);
+		graphics.drawString(StringScreen.NAVIGATE_THE_MENU, 100, 414);
 	}
 
 	public void keyReleased(KeyEvent e) {

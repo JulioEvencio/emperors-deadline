@@ -10,7 +10,7 @@ import emperorsdeadline.strings.StringInterfaceComponents;
 public class RecruitSoldierButton extends Entity {
 
 	public RecruitSoldierButton(int x, int y) {
-		super(x, y, 115, 20);
+		super(x, y, 130, 20);
 	}
 
 	@Override

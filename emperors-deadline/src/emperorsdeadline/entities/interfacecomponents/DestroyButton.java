@@ -10,7 +10,7 @@ import emperorsdeadline.strings.StringInterfaceComponents;
 public class DestroyButton extends Entity {
 
 	public DestroyButton(int x, int y) {
-		super(x, y, 126, 20);
+		super(x, y, 150, 20);
 	}
 
 	@Override

@@ -29,8 +29,8 @@ public class Info {
 		graphics.drawString(String.format("%s: %d", StringScenario.FOOD, Math.min(this.world.getFood(), 999)), 200, 30);
 		graphics.drawString(String.format("%s: %d", StringScenario.POPULATION, Math.min(this.world.getPopulation(), 999)), 200, 50);
 
-		graphics.drawString(String.format("%s: %d", StringScenario.STONE, Math.min(this.world.getStone(), 999)), 400, 30);
-		graphics.drawString(String.format("%s: %d", StringScenario.WOOD, Math.min(this.world.getWood(), 999)), 400, 50);
+		graphics.drawString(String.format("%s: %d", StringScenario.STONE, Math.min(this.world.getStone(), 999)), 390, 30);
+		graphics.drawString(String.format("%s: %d", StringScenario.WOOD, Math.min(this.world.getWood(), 999)), 390, 50);
 
 		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.world.getDaysRemaining()), 530, 30);
 		graphics.drawString(String.format("%s: %02d:00", StringScenario.TIME, this.world.getGameTime()), 530, 50);
