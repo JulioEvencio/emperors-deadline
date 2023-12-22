@@ -6,11 +6,13 @@ import java.awt.event.MouseEvent;
 
 import emperorsdeadline.scenarios.lore.IntroductionLore;
 import emperorsdeadline.scenarios.world.World;
+import emperorsdeadline.screens.GameOver;
 import emperorsdeadline.screens.Pause;
 
 public class Scenario {
 
 	private final IntroductionLore introductionLore;
+	private final GameOver gameOver;
 
 	private final World world;
 	private final Info info;
@@ -21,11 +23,13 @@ public class Scenario {
 
 	public Scenario() {
 		this.introductionLore = new IntroductionLore();
+		this.gameOver = new GameOver();
 
 		this.world = new World();
 		this.info = new Info(this.world);
 
-		Scenario.scenarioState = ScenarioState.INTRODUCTION_LORE;
+		// Scenario.scenarioState = ScenarioState.INTRODUCTION_LORE;
+		Scenario.scenarioState = ScenarioState.GAME_OVER;
 
 		this.pause = new Pause();
 	}
@@ -46,6 +50,8 @@ public class Scenario {
 			this.pause.render(graphics);
 		} else if (Scenario.scenarioState == ScenarioState.INTRODUCTION_LORE) {
 			this.introductionLore.render(graphics);
+		} else if (Scenario.scenarioState == ScenarioState.GAME_OVER) {
+			this.gameOver.render(graphics);
 		}
 	}
 
@@ -54,9 +60,11 @@ public class Scenario {
 			this.pause.keyReleased(e);
 		} else if (Scenario.scenarioState == ScenarioState.INTRODUCTION_LORE) {
 			this.introductionLore.keyReleased(e);
+		} else if (Scenario.scenarioState == ScenarioState.GAME_OVER) {
+			this.gameOver.keyReleased(e);
 		}
 
-		if (Scenario.scenarioState != ScenarioState.INTRODUCTION_LORE && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {
+		if (Scenario.scenarioState == ScenarioState.WORLD && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {
 			if (Scenario.scenarioState == ScenarioState.WORLD) {
 				Scenario.scenarioState = ScenarioState.PAUSED;
 			} else {

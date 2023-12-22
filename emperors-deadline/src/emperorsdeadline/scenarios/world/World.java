@@ -16,6 +16,8 @@ import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
 import emperorsdeadline.entities.terrain.Tree;
+import emperorsdeadline.scenarios.Scenario;
+import emperorsdeadline.scenarios.ScenarioState;
 import emperorsdeadline.scenarios.stores.StoreBarracks;
 import emperorsdeadline.scenarios.stores.StoreDestroyBuilding;
 import emperorsdeadline.scenarios.stores.StoreGrass;
@@ -187,7 +189,8 @@ public class World {
 	private void gameCycle() {
 		this.gameCycle++;
 
-		if (this.gameCycle >= 100) {
+		// if (this.gameCycle >= 100) {
+		if (this.gameCycle >= 10) {
 			this.gameTime++;
 			this.gameCycle = 0;
 
@@ -238,6 +241,14 @@ public class World {
 	}
 
 	public void tick() {
+		if (this.daysRemaining < 0) {
+			if (this.soldiers > 100) {
+				Scenario.scenarioState = ScenarioState.VICTORY;
+			} else {
+				Scenario.scenarioState = ScenarioState.GAME_OVER;
+			}
+		}
+		
 		if (this.worldState == WorldState.WORLD) {
 			if (this.hasClick) {
 				this.mouseClick();
