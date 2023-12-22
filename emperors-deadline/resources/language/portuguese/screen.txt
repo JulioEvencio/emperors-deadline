@@ -7,9 +7,14 @@ Sair
 3. F4 -> para ativar/desativar música
 Programador: Júlio Igreja
 -> Acesse: https://github.com/JulioEvencio
+Sprites: Maik Hoffmann
+-> Acesse: http://www.majadroid.com
+Audio: Seth_Makes_Sounds
+-> Acesse: https://freesound.org/people/Seth_Makes_Sounds/
 Pressione ENTER para voltar ao menu
 Use as teclas W e S para mover e ENTER para selecionar
 Vitória
 Parabéns, você derrotou o Império!
 Game Over
 O Império derrotou você...
+Código fonte: https://github.com/JulioEvencio/emperors-deadline

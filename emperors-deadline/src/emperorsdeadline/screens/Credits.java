@@ -25,6 +25,14 @@ public class Credits {
 		graphics.drawString(StringScreen.PROGRAMMER, Game.WIDTH / 2 - 330, 160);
 		graphics.drawString(StringScreen.PROGRAMMER_GITHUB, Game.WIDTH / 2 - 330, 180);
 
+		graphics.drawString(StringScreen.SPRITES, Game.WIDTH / 2 - 330, 230);
+		graphics.drawString(StringScreen.SPRITES_LINK, Game.WIDTH / 2 - 330, 250);
+
+		graphics.drawString(StringScreen.AUDIO, Game.WIDTH / 2 - 330, 300);
+		graphics.drawString(StringScreen.AUDIO_LINK, Game.WIDTH / 2 - 330, 320);
+		
+		graphics.drawString(StringScreen.SOURCE_CODE, Game.WIDTH / 2 - 330, 370);
+
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
 		graphics.drawString(StringScreen.RETURN_TO_MENU, Game.WIDTH / 2 - 180, 414);

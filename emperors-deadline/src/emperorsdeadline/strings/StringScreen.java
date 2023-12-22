@@ -18,8 +18,14 @@ public class StringScreen {
 	public static String SHOW_HIDE_FPS = "2. F3 -> to show/hide FPS";
 	public static String ENABLE_DISABLE_MUSIC = "3. F4 -> to enable/disable music";
 
-	public static String PROGRAMMER = "-> Programmer: Júlio Igreja";
+	public static String PROGRAMMER = "Programmer: Júlio Igreja";
 	public static String PROGRAMMER_GITHUB = "-> Access: https://github.com/JulioEvencio";
+	
+	public static String SPRITES = "Sprites: Maik Hoffmann";
+	public static String SPRITES_LINK = "-> Access: http://www.majadroid.com";
+	
+	public static String AUDIO = "Audio: Seth_Makes_Sounds";
+	public static String AUDIO_LINK = "-> Access: https://freesound.org/people/Seth_Makes_Sounds/";
 
 	public static String RETURN_TO_MENU = "Press ENTER to go back to main menu";
 	public static String NAVIGATE_THE_MENU = "Use W and S keys to move and ENTER to select";
@@ -29,6 +35,8 @@ public class StringScreen {
 
 	public static String GAME_OVER = "Game Over";
 	public static String GAME_OVER_STRING = "The Empire has defeated you...";
+	
+	public static String SOURCE_CODE = "Source Code: https://github.com/JulioEvencio/emperors-deadline";
 	
 	public static void load(String language) throws IOException {
 		String fileName = String.format("/language/%s/screen.txt", language);
@@ -45,6 +53,12 @@ public class StringScreen {
 
 			StringScreen.PROGRAMMER = Util.readLine(reader);
 			StringScreen.PROGRAMMER_GITHUB = Util.readLine(reader);
+			
+			StringScreen.SPRITES = Util.readLine(reader);
+			StringScreen.SPRITES_LINK = Util.readLine(reader);
+			
+			StringScreen.AUDIO = Util.readLine(reader);
+			StringScreen.AUDIO_LINK = Util.readLine(reader);
 
 			StringScreen.RETURN_TO_MENU = Util.readLine(reader);
 			StringScreen.NAVIGATE_THE_MENU = Util.readLine(reader);
@@ -54,6 +68,8 @@ public class StringScreen {
 
 			StringScreen.GAME_OVER = Util.readLine(reader);
 			StringScreen.GAME_OVER_STRING = Util.readLine(reader);
+			
+			StringScreen.SOURCE_CODE = Util.readLine(reader);
 		}
 	}
 
