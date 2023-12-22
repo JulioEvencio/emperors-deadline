@@ -61,13 +61,13 @@ public class Menu {
 
 			if (this.currentOption == 0) {
 				Game.newGame();
-				Game.gameState = GameState.RUN;
+				Game.setGameState(GameState.RUN);
 			} else if (this.currentOption == 1) {
-				Game.gameState = GameState.TUTORIAL;
+				Game.setGameState(GameState.TUTORIAL);
 			} else if (this.currentOption == 2) {
-				Game.gameState = GameState.CREDITS;
+				Game.setGameState(GameState.CREDITS);
 			} else if (this.currentOption == 3) {
-				Game.gameState = GameState.EXIT;
+				Game.setGameState(GameState.EXIT);
 			}
 		}
 	}

@@ -33,7 +33,7 @@ public class Tutorial {
 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Game.gameState = GameState.MENU;
+			Game.setGameState(GameState.MENU);
 		}
 	}
 

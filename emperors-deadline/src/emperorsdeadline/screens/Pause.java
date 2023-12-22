@@ -64,9 +64,9 @@ public class Pause {
 			if (this.currentOption == 0) {
 				Scenario.scenarioState = ScenarioState.WORLD;
 			} else if (this.currentOption == 1) {
-				Game.gameState = GameState.MENU;
+				Game.setGameState(GameState.MENU);
 			} else if (this.currentOption == 2) {
-				Game.gameState = GameState.EXIT;
+				Game.setGameState(GameState.EXIT);
 			}
 		}
 	}

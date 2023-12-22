@@ -24,10 +24,10 @@ public class GameOver {
 		graphics.setFont(new Font("arial", Font.BOLD, 30));
 
 		graphics.drawString(StringScreen.GAME_OVER, 280, 160);
-		
+
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
-		
+
 		graphics.drawString(StringScreen.GAME_OVER_STRING, 230, 200);
 
 		graphics.setColor(Color.CYAN);
@@ -37,7 +37,7 @@ public class GameOver {
 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Game.gameState = GameState.MENU;
+			Game.setGameState(GameState.MENU);
 		}
 	}
 

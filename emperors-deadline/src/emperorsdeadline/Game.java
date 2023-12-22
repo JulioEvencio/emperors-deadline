@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JOptionPane;
 
+import emperorsdeadline.resources.Audio;
 import emperorsdeadline.scenarios.Scenario;
 import emperorsdeadline.screens.Credits;
 import emperorsdeadline.screens.Menu;
@@ -31,7 +32,7 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	public static final int WIDTH = 720;
 	public static final int HEIGHT = 480;
 
-	public static GameState gameState;
+	private static GameState gameState;
 
 	private static int mouseX;
 	private static int mouseY;
@@ -46,6 +47,12 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 	private final Credits credits;
 
 	private static Scenario scenario;
+
+	private boolean enableAudio;
+
+	private static Audio audioNow;
+	private static Audio audioMenu;
+	private static Audio audioGame;
 
 	public Game() {
 		this.addKeyListener(this);
@@ -62,7 +69,13 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		this.tutorial = new Tutorial();
 		this.credits = new Credits();
 
+		this.enableAudio = true;
+
+		Game.audioMenu = new Audio("/audios/menu.wav");
+		Game.audioGame = new Audio("/audios/game.wav");
+
 		Game.newGame();
+		Game.setAudio(Game.audioMenu);
 	}
 
 	public static void newGame() {
@@ -77,7 +90,31 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		return Game.mouseY;
 	}
 
+	public static void setGameState(GameState gameState) {
+		if (Game.audioNow != Game.audioGame && gameState == GameState.RUN) {
+			Game.setAudio(Game.audioGame);
+		} else if (Game.audioNow != Game.audioMenu) {
+			Game.setAudio(audioMenu);
+		}
+
+		Game.gameState = gameState;
+	}
+
+	public static void setAudio(Audio audio) {
+		if (Game.audioNow != null) {
+			Game.audioNow.stop();
+		}
+
+		Game.audioNow = audio;
+	}
+
 	private void tick() {
+		if (this.enableAudio) {
+			Game.audioNow.play();
+		} else {
+			Game.audioNow.stop();
+		}
+
 		if (Game.gameState == GameState.RUN) {
 			Game.scenario.tick();
 		} else if (Game.gameState == GameState.MENU) {
@@ -182,6 +219,10 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 
 		if (e.getKeyCode() == KeyEvent.VK_F3) {
 			this.showFPS = !this.showFPS;
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_F4) {
+			this.enableAudio = !this.enableAudio;
 		}
 	}
 
