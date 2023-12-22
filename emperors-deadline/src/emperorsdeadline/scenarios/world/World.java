@@ -242,7 +242,7 @@ public class World {
 
 	public void tick() {
 		if (this.daysRemaining < 0) {
-			if (this.soldiers > 100) {
+			if (this.soldiers > Util.generateRandomNumber(80, 120)) {
 				Scenario.scenarioState = ScenarioState.VICTORY;
 			} else {
 				Scenario.scenarioState = ScenarioState.GAME_OVER;

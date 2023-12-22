@@ -17,7 +17,9 @@ public class StringScreen {
 	public static String RETURN_TO_MENU = "Press ENTER to go back to main menu";
 	public static String NAVIGATE_THE_MENU = "Use W and S keys to move and ENTER to select";
 
-	public static String VICTORY = "Congratulations, you defeated the Empire!";
+	public static String VICTORY = "Victory";
+	public static String VICTORY_STRING = "Congratulations, you defeated the Empire!";
+
 	public static String GAME_OVER = "Game Over";
 	public static String GAME_OVER_STRING = "The Empire has defeated you...";
 

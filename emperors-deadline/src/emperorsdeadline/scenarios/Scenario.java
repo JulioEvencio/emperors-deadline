@@ -8,11 +8,13 @@ import emperorsdeadline.scenarios.lore.IntroductionLore;
 import emperorsdeadline.scenarios.world.World;
 import emperorsdeadline.screens.GameOver;
 import emperorsdeadline.screens.Pause;
+import emperorsdeadline.screens.Victory;
 
 public class Scenario {
 
 	private final IntroductionLore introductionLore;
 	private final GameOver gameOver;
+	private final Victory victory;
 
 	private final World world;
 	private final Info info;
@@ -24,12 +26,12 @@ public class Scenario {
 	public Scenario() {
 		this.introductionLore = new IntroductionLore();
 		this.gameOver = new GameOver();
+		this.victory = new Victory();
 
 		this.world = new World();
 		this.info = new Info(this.world);
 
-		// Scenario.scenarioState = ScenarioState.INTRODUCTION_LORE;
-		Scenario.scenarioState = ScenarioState.GAME_OVER;
+		Scenario.scenarioState = ScenarioState.INTRODUCTION_LORE;
 
 		this.pause = new Pause();
 	}
@@ -52,6 +54,8 @@ public class Scenario {
 			this.introductionLore.render(graphics);
 		} else if (Scenario.scenarioState == ScenarioState.GAME_OVER) {
 			this.gameOver.render(graphics);
+		} else if (Scenario.scenarioState == ScenarioState.VICTORY) {
+			this.victory.render(graphics);
 		}
 	}
 
@@ -62,6 +66,8 @@ public class Scenario {
 			this.introductionLore.keyReleased(e);
 		} else if (Scenario.scenarioState == ScenarioState.GAME_OVER) {
 			this.gameOver.keyReleased(e);
+		} else if (Scenario.scenarioState == ScenarioState.VICTORY) {
+			this.victory.keyReleased(e);
 		}
 
 		if (Scenario.scenarioState == ScenarioState.WORLD && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {
