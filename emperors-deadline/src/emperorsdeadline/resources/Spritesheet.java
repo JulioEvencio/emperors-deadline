@@ -14,7 +14,7 @@ public class Spritesheet {
 	public static BufferedImage getSprite(int x, int y, int width, int height) {
 		if (Spritesheet.spritesheet == null) {
 			try {
-				String path = "/sprites/Tiny-Islands-by-Majadroid/tilemap-separated.png";
+				String path = "/sprites/tilemap-separated.png";
 
 				Spritesheet.spritesheet = ImageIO.read(Spritesheet.class.getResource(path));
 			} catch (Exception e) {
