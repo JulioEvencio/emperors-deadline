@@ -36,7 +36,7 @@ public class StoreBarracks extends Store {
 		this.removeButton = new RemoveButton(100, 220);
 
 		this.soldiersGold = 10;
-		this.soldiersPopulation = 0;
+		this.soldiersPopulation = 1;
 
 		this.backButton = new BackButton(320, 400);
 
@@ -51,8 +51,8 @@ public class StoreBarracks extends Store {
 		} else if (this.removeButton.wasClicked(super.clickX, super.clickY)) {
 			this.soldiersPopulation -= 1;
 
-			if (this.soldiersPopulation < 0) {
-				this.soldiersPopulation = 0;
+			if (this.soldiersPopulation < 1) {
+				this.soldiersPopulation = 1;
 			}
 		} else if (this.addButton.wasClicked(super.clickX, super.clickY)) {
 			this.soldiersPopulation += 10;
