@@ -12,7 +12,7 @@ public class StringIntroduction {
 
 	public static String INTRODUCTION = "Introduction";
 
-	public static String LINE_1 = "Assistant";
+	public static String LINE_1 = "Assistant:";
 	public static String LINE_2 = "Hello, Count, I mean... You're no longer a count since yesterday when";
 	public static String LINE_3 = "you declared independence from the Empire. Now the emperor is";
 	public static String LINE_4 = String.format("furious and demands our surrender. He has given us a deadline of %d days", World.DAYS);

@@ -70,7 +70,7 @@ public class Scenario {
 			this.victory.keyReleased(e);
 		}
 
-		if (Scenario.scenarioState == ScenarioState.WORLD && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {
+		if ((Scenario.scenarioState == ScenarioState.WORLD || Scenario.scenarioState == ScenarioState.PAUSED) && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {
 			if (Scenario.scenarioState == ScenarioState.WORLD) {
 				Scenario.scenarioState = ScenarioState.PAUSED;
 			} else {
