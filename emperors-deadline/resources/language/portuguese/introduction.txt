@@ -1,0 +1,11 @@
+Introdução
+Assistente:
+Olá, Conde, quer dizer... Você não é mais conde desde ontem quando
+você declarou independência do Império, agora o imperador está
+furioso e quer a nossa rendição, ele nos deu um prazo de ${WORLD_DAYS} dias
+para a gente se render, óbvio que nós não vamos fazer isso,
+vamos user esses ${WORLD_DAYS} dias para fortificar nossas defesas
+e recrutar soldados. Independência ou morte!
+Objetivo: recrutar o máximo de soldados até o dia do ataque
+Como jogar: Use o mouse para construir
+Pressione ENTER para continuar

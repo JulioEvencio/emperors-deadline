@@ -1,0 +1,3 @@
+Erro
+Erro ao carregar sprites
+Erro ao carregar áudios

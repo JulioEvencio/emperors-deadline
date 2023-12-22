@@ -1,5 +1,12 @@
 package emperorsdeadline.strings;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
+import emperorsdeadline.util.Util;
+
 public class StringScreen {
 
 	public static String NEW_GAME = "New Game";
@@ -22,5 +29,32 @@ public class StringScreen {
 
 	public static String GAME_OVER = "Game Over";
 	public static String GAME_OVER_STRING = "The Empire has defeated you...";
+	
+	public static void load(String language) throws IOException {
+		String fileName = String.format("/language/%s/screen.txt", language);
+
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(StringError.class.getResourceAsStream(fileName), StandardCharsets.UTF_8))) {
+			StringScreen.NEW_GAME = Util.readLine(reader);
+			StringScreen.TUTORIAL = Util.readLine(reader);
+			StringScreen.CREDITS = Util.readLine(reader);
+			StringScreen.EXIT = Util.readLine(reader);
+
+			StringScreen.PAUSE = Util.readLine(reader);
+			StringScreen.SHOW_HIDE_FPS = Util.readLine(reader);
+			StringScreen.ENABLE_DISABLE_MUSIC = Util.readLine(reader);
+
+			StringScreen.PROGRAMMER = Util.readLine(reader);
+			StringScreen.PROGRAMMER_GITHUB = Util.readLine(reader);
+
+			StringScreen.RETURN_TO_MENU = Util.readLine(reader);
+			StringScreen.NAVIGATE_THE_MENU = Util.readLine(reader);
+
+			StringScreen.VICTORY = Util.readLine(reader);
+			StringScreen.VICTORY_STRING = Util.readLine(reader);
+
+			StringScreen.GAME_OVER = Util.readLine(reader);
+			StringScreen.GAME_OVER_STRING = Util.readLine(reader);
+		}
+	}
 
 }

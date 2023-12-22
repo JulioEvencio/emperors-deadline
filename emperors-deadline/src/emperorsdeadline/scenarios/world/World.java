@@ -27,6 +27,8 @@ import emperorsdeadline.util.Util;
 
 public class World {
 
+	public static final int DAYS = 45;
+	
 	public WorldState worldState;
 	
 	private int clickX;

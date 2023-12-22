@@ -1,0 +1,15 @@
+Novo Jogo
+Tutorial
+Créditos
+Sair
+1. ESC ou P -> use para pausar o jogo
+2. F3 -> para mostrar/ocultar FPS
+3. F4 -> para ativar/desativar música
+Programador: Júlio Igreja
+-> Acesse: https://github.com/JulioEvencio
+Pressione ENTER para voltar ao menu
+Use as teclas W e S para mover e ENTER para selecionar
+Vitória
+Parabéns, você derrotou o Império!
+Game Over
+O Império derrotou você...

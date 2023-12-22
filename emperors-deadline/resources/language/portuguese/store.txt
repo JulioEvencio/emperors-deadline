@@ -1,0 +1,11 @@
+Comprado
+Recursos insuficientes
+Você quer destruir essa construção?
+A construção foi destruída
+recrutado
+Fazenda: %d Ouro e %d Madeira
+Casa: %d Ouro e %d Madeira
+Serraria: %d Ouro
+Mina de Pedra: %d Ouro e %d Madeira
+Quartel: %d Ouro, %d Madeira e %d Pedra
+%dx - Soldado: %d Ouro e %d População

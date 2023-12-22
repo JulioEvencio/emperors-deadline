@@ -1,0 +1,8 @@
+Ouro
+Soldados
+Comida
+População
+Pedra
+Madeira
+Dias restantes
+Hora
