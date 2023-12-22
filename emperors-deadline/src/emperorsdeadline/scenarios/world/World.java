@@ -8,6 +8,7 @@ import java.util.List;
 
 import emperorsdeadline.Game;
 import emperorsdeadline.entities.Entity;
+import emperorsdeadline.entities.buildings.Barracks;
 import emperorsdeadline.entities.buildings.Farm;
 import emperorsdeadline.entities.buildings.House;
 import emperorsdeadline.entities.buildings.Sawmill;
@@ -15,6 +16,7 @@ import emperorsdeadline.entities.buildings.StoneMine;
 import emperorsdeadline.entities.terrain.Grass;
 import emperorsdeadline.entities.terrain.Mountain;
 import emperorsdeadline.entities.terrain.Tree;
+import emperorsdeadline.scenarios.stores.StoreBarracks;
 import emperorsdeadline.scenarios.stores.StoreDestroyBuilding;
 import emperorsdeadline.scenarios.stores.StoreGrass;
 import emperorsdeadline.scenarios.stores.StoreMountain;
@@ -48,6 +50,7 @@ public class World {
 	private StoreGrass storeGrass;
 	private StoreTree storeTree;
 	private StoreMountain storeMountain;
+	private StoreBarracks storeBarracks;
 	private StoreDestroyBuilding storeDestroyBuilding;
 
 	public World() {
@@ -61,14 +64,14 @@ public class World {
 		this.gameTime = 0;
 		this.gameCycle = 0;
 
-		this.gold = 180;
+		this.gold = 999;
 		this.soldiers = 0;
 
-		this.food = 0;
-		this.population = 0;
+		this.food = 999;
+		this.population = 999;
 
-		this.stone = 0;
-		this.wood = 0;
+		this.stone = 999;
+		this.wood = 999;
 
 		this.entities = new ArrayList<>();
 
@@ -91,6 +94,8 @@ public class World {
 		this.storeGrass = new StoreGrass(this);
 		this.storeTree = new StoreTree(this);
 		this.storeMountain = new StoreMountain(this);
+		this.storeMountain.resetBarrack();
+		this.storeBarracks = new StoreBarracks(this);
 		this.storeDestroyBuilding = new StoreDestroyBuilding(this);
 	}
 
@@ -116,6 +121,10 @@ public class World {
 
 	public int getSoldiers() {
 		return soldiers;
+	}
+	
+	public void addSoldiers(int soldiers) {
+		this.soldiers += soldiers;
 	}
 
 	public int getFood() {
@@ -164,6 +173,9 @@ public class World {
 				} else if (entity instanceof Mountain) {
 					this.storeMountain = new StoreMountain(this);
 					this.worldState = WorldState.STORE_MOUNTAIN;
+				} else if (entity instanceof Barracks) {
+					this.storeBarracks = new StoreBarracks(this);
+					this.worldState = WorldState.STORE_BARRACKS;
 				} else {
 					this.storeDestroyBuilding = new StoreDestroyBuilding(this);
 					this.worldState = WorldState.STORE_DESTROY_BUILDING;
@@ -240,6 +252,8 @@ public class World {
 			this.storeTree.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.tick(this.entitySelected);
+		} else if (this.worldState == WorldState.STORE_BARRACKS) {
+			this.storeBarracks.tick(this.entitySelected);
 		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
 			this.storeDestroyBuilding.tick(this.entitySelected);
 		}
@@ -286,6 +300,8 @@ public class World {
 			this.storeTree.render(graphics);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.render(graphics);
+		} else if (this.worldState == WorldState.STORE_BARRACKS) {
+			this.storeBarracks.render(graphics);
 		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
 			this.storeDestroyBuilding.render(graphics);
 		}
@@ -302,6 +318,8 @@ public class World {
 			this.storeTree.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_MOUNTAIN) {
 			this.storeMountain.mouseReleased(e);
+		} else if (this.worldState == WorldState.STORE_BARRACKS) {
+			this.storeBarracks.mouseReleased(e);
 		} else if (this.worldState == WorldState.STORE_DESTROY_BUILDING) {
 			this.storeDestroyBuilding.mouseReleased(e);
 		}

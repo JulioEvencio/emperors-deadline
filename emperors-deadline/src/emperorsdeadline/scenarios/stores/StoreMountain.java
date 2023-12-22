@@ -16,16 +16,18 @@ import emperorsdeadline.strings.StringStore;
 
 public class StoreMountain extends Store {
 
+	private static boolean hasBarracks = false;
+	
 	private final BuyButton buyStoneMine;
 
 	private final int stoneMineGold;
 	private final int stoneMineWood;
 
-	private final BuyButton buyBarracks;
+	private BuyButton buyBarracks;
 
-	private final int barracksGold;
-	private final int barracksWood;
-	private final int barracksStone;
+	private int barracksGold;
+	private int barracksWood;
+	private int barracksStone;
 
 	private final BackButton backButton;
 
@@ -40,16 +42,22 @@ public class StoreMountain extends Store {
 		this.stoneMineGold = 150;
 		this.stoneMineWood = 150;
 
-		this.buyBarracks = new BuyButton(100, 310);
+		if (!StoreMountain.hasBarracks) {
+			this.buyBarracks = new BuyButton(100, 310);
 
-		this.barracksGold = 250;
-		this.barracksWood = 250;
-		this.barracksStone = 250;
+			this.barracksGold = 250;
+			this.barracksWood = 250;
+			this.barracksStone = 250;
+		}
 
 		this.backButton = new BackButton(320, 400);
 
 		this.purchased = false;
 		this.fail = false;
+	}
+	
+	public void resetBarrack() {
+		StoreMountain.hasBarracks = false;
 	}
 
 	@Override
@@ -71,13 +79,14 @@ public class StoreMountain extends Store {
 				} else {
 					this.fail = true;
 				}
-			} else if (this.buyBarracks.wasClicked(super.clickX, super.clickY)) {
+			} else if (!StoreMountain.hasBarracks && this.buyBarracks.wasClicked(super.clickX, super.clickY)) {
 				if (super.world.getGold() >= this.barracksGold && super.world.getWood() >= this.barracksWood && super.world.getStone() >= this.barracksStone) {
 					super.world.removeGold(this.barracksGold);
 					super.world.removeWood(this.barracksWood);
 					super.world.removeStone(this.barracksStone);
 
 					this.purchased = true;
+					StoreMountain.hasBarracks = true;
 
 					Barracks barracks = new Barracks(entity.getX(), entity.getY(), entity.getWidth(), entity.getHeight());
 
@@ -99,11 +108,17 @@ public class StoreMountain extends Store {
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
 
 		graphics.drawString(StringStore.getPriceStoneMine(this.stoneMineGold, this.stoneMineWood), 100, 200);
-		graphics.drawString(StringStore.getPriceBarracks(this.barracksGold, this.barracksWood, this.barracksStone), 100, 300);
+		
+		if (!StoreMountain.hasBarracks) {
+			graphics.drawString(StringStore.getPriceBarracks(this.barracksGold, this.barracksWood, this.barracksStone), 100, 300);
+		}
 
 		if (!this.purchased) {
 			this.buyStoneMine.render(graphics);
-			this.buyBarracks.render(graphics);
+			
+			if (!StoreMountain.hasBarracks) {
+				this.buyBarracks.render(graphics);
+			}
 
 			if (this.fail) {
 				graphics.setColor(Color.RED);
