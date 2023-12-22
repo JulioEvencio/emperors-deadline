@@ -21,8 +21,8 @@ public class StringIntroduction {
 	public static String LINE_7 = "and recruit soldiers. Independence or death!";
 
 	public static String LINE_8 = "Objective: Recruit as many soldiers as possible by the day of the attack.";
-	public static String LINE_9 = "How to play: Use the mouse to build.";
-
+	
+	public static String HOW_TO_PLAY = "How to play: Use the mouse to build.";
 	public static String CONTINUE = "Press ENTER to continue";
 
 	public static void load(String language) throws IOException {
@@ -39,8 +39,8 @@ public class StringIntroduction {
 			StringIntroduction.LINE_6 = Util.readLine(reader).replace("${WORLD_DAYS}", String.valueOf(World.DAYS));
 			StringIntroduction.LINE_7 = Util.readLine(reader);
 			StringIntroduction.LINE_8 = Util.readLine(reader);
-			StringIntroduction.LINE_9 = Util.readLine(reader);
 			
+			StringIntroduction.HOW_TO_PLAY = Util.readLine(reader);
 			StringIntroduction.CONTINUE = Util.readLine(reader);
 		}
 	}

@@ -31,7 +31,8 @@ public class IntroductionLore {
 		graphics.drawString(StringIntroduction.LINE_6, Game.WIDTH / 2 - 330, 260);
 		graphics.drawString(StringIntroduction.LINE_7, Game.WIDTH / 2 - 330, 280);
 		graphics.drawString(StringIntroduction.LINE_8, Game.WIDTH / 2 - 330, 320);
-		graphics.drawString(StringIntroduction.LINE_9, Game.WIDTH / 2 - 330, 340);
+
+		graphics.drawString(StringIntroduction.HOW_TO_PLAY, Game.WIDTH / 2 - 330, 340);
 
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));

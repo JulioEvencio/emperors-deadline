@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 import emperorsdeadline.Game;
 import emperorsdeadline.GameState;
+import emperorsdeadline.strings.StringIntroduction;
 import emperorsdeadline.strings.StringScreen;
 
 public class Tutorial {
@@ -25,6 +26,7 @@ public class Tutorial {
 		graphics.drawString(StringScreen.PAUSE, Game.WIDTH / 2 - 330, 160);
 		graphics.drawString(StringScreen.SHOW_HIDE_FPS, Game.WIDTH / 2 - 330, 180);
 		graphics.drawString(StringScreen.ENABLE_DISABLE_MUSIC, Game.WIDTH / 2 - 330, 200);
+		graphics.drawString(StringIntroduction.HOW_TO_PLAY, Game.WIDTH / 2 - 330, 240);
 
 		graphics.setColor(Color.CYAN);
 		graphics.setFont(new Font("arial", Font.BOLD, 16));
