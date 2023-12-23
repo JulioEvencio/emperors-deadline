@@ -86,21 +86,7 @@ public class World {
 
 		this.entities = new ArrayList<>();
 
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 4; j++) {
-				switch (Util.generateRandomNumber(1, 3)) {
-					case 1:
-						this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
-					case 2:
-						this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
-					case 3:
-						this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
-						break;
-				}
-			}
-		}
+		this.generateWorld();
 		
 		this.foodTotal = 0;
 		this.houseTotal = 0;
@@ -115,6 +101,37 @@ public class World {
 		this.storeDestroyBuilding = new StoreDestroyBuilding(this);
 	}
 
+	private void generateWorld() {
+		int grass = 0;
+		int tree = 0;
+		int mountain = 0;
+		
+		while (grass < 3 || tree < 3 || mountain < 4) {
+			grass = 0;
+			tree = 0;
+			mountain = 0;
+			
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < 4; j++) {
+					switch (Util.generateRandomNumber(1, 3)) {
+						case 1:
+							grass++;
+							this.entities.add(new Grass(20 + (100 * i), 90 + (100 * j), 80, 80));
+							break;
+						case 2:
+							tree++;
+							this.entities.add(new Tree(20 + (100 * i), 90 + (100 * j), 80, 80));
+							break;
+						case 3:
+							mountain++;
+							this.entities.add(new Mountain(20 + (100 * i), 90 + (100 * j), 80, 80));
+							break;
+					}
+				}
+			}
+		}
+	}
+	
 	public int getDaysRemaining() {
 		return daysRemaining;
 	}
