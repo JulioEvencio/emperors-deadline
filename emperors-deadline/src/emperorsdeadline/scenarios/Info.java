@@ -1,8 +1,10 @@
 package emperorsdeadline.scenarios;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import emperorsdeadline.Game;
 import emperorsdeadline.scenarios.world.World;
@@ -34,6 +36,14 @@ public class Info {
 
 		graphics.drawString(String.format("%s: %d", StringScenario.DAYS_REMAINING, this.world.getDaysRemaining()), 530, 30);
 		graphics.drawString(String.format("%s: %02d:00", StringScenario.TIME, this.world.getGameTime()), 530, 50);
+		
+		Graphics2D g = (Graphics2D) graphics;
+		g.setStroke(new BasicStroke(15.0f));
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 0, Game.WIDTH, 80);
+		
+		g.setStroke(new BasicStroke(1.0f));
 	}
 
 }

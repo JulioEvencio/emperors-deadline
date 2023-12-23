@@ -1,7 +1,9 @@
 package emperorsdeadline.scenarios.world;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -329,6 +331,14 @@ public class World {
 		});
 
 		this.systemDayNight(graphics);
+		
+		Graphics2D g = (Graphics2D) graphics;
+		g.setStroke(new BasicStroke(15.0f));
+		
+		g.setColor(Color.BLACK);
+		g.drawRect(0, 80, Game.WIDTH, Game.HEIGHT - 80);
+		
+		g.setStroke(new BasicStroke(1.0f));
 	}
 
 	private void systemDayNight(Graphics graphics) {
