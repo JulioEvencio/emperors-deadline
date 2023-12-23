@@ -105,11 +105,11 @@ public class Pause {
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_W) {
+		if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
 			this.up = true;
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_S) {
+		if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
 			this.down = true;
 		}
 
