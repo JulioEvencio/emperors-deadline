@@ -9,8 +9,8 @@ Programador: Júlio Igreja
 -> Acesse: https://github.com/JulioEvencio
 Sprites: Maik Hoffmann
 -> Acesse: http://www.majadroid.com
-Audio: Seth_Makes_Sounds
--> Acesse: https://freesound.org/people/Seth_Makes_Sounds/
+Audio: bainmack
+-> Acesse: https://freesound.org/people/bainmack/
 Pressione ENTER para voltar ao menu
 Use as teclas W e S para mover e ENTER para selecionar
 Vitória

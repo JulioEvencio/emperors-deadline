@@ -24,8 +24,8 @@ public class StringScreen {
 	public static String SPRITES = "Sprites: Maik Hoffmann";
 	public static String SPRITES_LINK = "-> Access: http://www.majadroid.com";
 	
-	public static String AUDIO = "Audio: Seth_Makes_Sounds";
-	public static String AUDIO_LINK = "-> Access: https://freesound.org/people/Seth_Makes_Sounds/";
+	public static String AUDIO = "Audio: bainmack";
+	public static String AUDIO_LINK = "-> https://freesound.org/people/bainmack/";
 
 	public static String RETURN_TO_MENU = "Press ENTER to go back to main menu";
 	public static String NAVIGATE_THE_MENU = "Use W and S keys to move and ENTER to select";
