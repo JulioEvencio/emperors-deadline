@@ -10,6 +10,7 @@ import emperorsdeadline.GameState;
 import emperorsdeadline.scenarios.Scenario;
 import emperorsdeadline.scenarios.ScenarioState;
 import emperorsdeadline.strings.StringGame;
+import emperorsdeadline.strings.StringInstructions;
 import emperorsdeadline.strings.StringPause;
 import emperorsdeadline.strings.StringScreen;
 
@@ -25,7 +26,7 @@ public class Pause {
 	private boolean enter;
 
 	public Pause() {
-		this.options = new String[3];
+		this.options = new String[4];
 
 		this.maxOption = this.options.length - 1;
 		this.currentOption = 0;
@@ -35,8 +36,9 @@ public class Pause {
 		this.enter = false;
 
 		this.options[0] = StringPause.RESUME;
-		this.options[1] = StringPause.MENU;
-		this.options[2] = StringScreen.EXIT;
+		this.options[1] = StringInstructions.INSTRUCTIONS;
+		this.options[2] = StringPause.MENU;
+		this.options[3] = StringScreen.EXIT;
 	}
 
 	public void tick() {
@@ -64,10 +66,14 @@ public class Pause {
 			if (this.currentOption == 0) {
 				Scenario.scenarioState = ScenarioState.WORLD;
 			} else if (this.currentOption == 1) {
-				Game.setGameState(GameState.MENU);
+				Scenario.scenarioState = ScenarioState.INSTRUCTIONS;
 			} else if (this.currentOption == 2) {
+				Game.setGameState(GameState.MENU);
+			} else if (this.currentOption == 3) {
 				Game.setGameState(GameState.EXIT);
 			}
+
+			this.currentOption = 0;
 		}
 	}
 
@@ -85,6 +91,7 @@ public class Pause {
 		graphics.drawString(options[0], Game.WIDTH / 2 - 50, 150);
 		graphics.drawString(options[1], Game.WIDTH / 2 - 50, 200);
 		graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
+		graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 
 		graphics.setColor(Color.YELLOW);
 
@@ -97,6 +104,9 @@ public class Pause {
 		} else if (currentOption == 2) {
 			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 250);
 			graphics.drawString(options[2], Game.WIDTH / 2 - 50, 250);
+		} else if (currentOption == 3) {
+			graphics.drawString("-> ", Game.WIDTH / 2 - 90, 300);
+			graphics.drawString(options[3], Game.WIDTH / 2 - 50, 300);
 		}
 
 		graphics.setColor(Color.CYAN);
