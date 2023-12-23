@@ -51,6 +51,11 @@ public class World {
 
 	private final List<Entity> entities;
 	
+	private int foodTotal;
+	private int houseTotal;
+	private int stoneTotal;
+	private int woodTotal;
+	
 	private StoreGrass storeGrass;
 	private StoreTree storeTree;
 	private StoreMountain storeMountain;
@@ -64,18 +69,18 @@ public class World {
 		this.clickY = 0;
 		this.hasClick = false;
 		
-		this.daysRemaining = 7;
+		this.daysRemaining = World.DAYS;
 		this.gameTime = 0;
 		this.gameCycle = 0;
 
-		this.gold = 999;
+		this.gold = 180;
 		this.soldiers = 0;
 
-		this.food = 999;
-		this.population = 999;
+		this.food = 0;
+		this.population = 0;
 
-		this.stone = 999;
-		this.wood = 999;
+		this.stone = 0;
+		this.wood = 0;
 
 		this.entities = new ArrayList<>();
 
@@ -94,6 +99,11 @@ public class World {
 				}
 			}
 		}
+		
+		this.foodTotal = 0;
+		this.houseTotal = 0;
+		this.woodTotal = 0;
+		this.stoneTotal = 0;
 		
 		this.storeGrass = new StoreGrass(this);
 		this.storeTree = new StoreTree(this);
@@ -191,8 +201,7 @@ public class World {
 	private void gameCycle() {
 		this.gameCycle++;
 
-		// if (this.gameCycle >= 100) {
-		if (this.gameCycle >= 10) {
+		if (this.gameCycle >= 100) {
 			this.gameTime++;
 			this.gameCycle = 0;
 
@@ -200,44 +209,78 @@ public class World {
 				this.gameTime = 0;
 				this.daysRemaining--;
 			}
+			
+			this.foodTotal = 0;
+			this.houseTotal = 0;
+			this.woodTotal = 0;
+			this.stoneTotal = 0;
 
 			this.entities.forEach(entity -> {
 				if (entity instanceof House) {
-					if (this.population < 999) {
-						int newPopulation = ((House) entity).getProduction();
-						
-						if ((this.food - newPopulation) >= 0) {
-							this.population += newPopulation;
-						}
-					}
-					
+					this.houseTotal++;
+
+					int newPopulation = ((House) entity).getProduction();
+
+					this.population += newPopulation;
+
 					if (this.gold < 999 && this.population > 0) {
 						this.gold += ((House) entity).getProduction();
 					}
 				}
 
 				if (entity instanceof Farm && this.food < 999) {
+					this.foodTotal++;
 					this.food += ((Farm) entity).getProduction();
 				}
 
 				if (entity instanceof Sawmill && this.wood < 999) {
+					this.woodTotal++;
 					this.wood += ((Sawmill) entity).getProduction();
 				}
 
 				if (entity instanceof StoneMine && this.stone < 999) {
+					this.stoneTotal++;
 					this.stone += ((StoneMine) entity).getProduction();
 				}
 			});
 			
-			this.food -= this.population;
+			int foodMax = this.foodTotal * 50;
+			int populationMax = this.houseTotal * 50;
+			int woodMax = this.woodTotal * 100;
+			int stoneMax = this.stoneTotal * 100;
 			
+			if (this.food > foodMax) {
+				this.food = foodMax;
+			}
+			
+			if (this.population > populationMax) {
+				this.population = populationMax;
+			}
+			
+			if (this.wood > woodMax) {
+				this.wood = woodMax;
+			}
+			
+			if (this.stone > stoneMax) {
+				this.stone = stoneMax;
+			}
+			
+			if (this.soldiers > 0) {
+				this.food -= this.soldiers;
+			}
+
+			this.food -= this.soldiers;
+
 			if (this.food < 0) {
-				this.food = 0;
-				this.population -= 5;
+				int soldiersLost = (int) Math.ceil((double) this.soldiers / 10);
+
+				this.soldiers -= soldiersLost;
 				
-				if (this.population < 0) {
-					this.population = 0;
+				if (this.soldiers < 0) {
+					this.soldiers = 0;
 				}
+				
+				this.food = 0;
 			}
 		}
 	}
