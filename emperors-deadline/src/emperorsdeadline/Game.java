@@ -74,7 +74,6 @@ public class Game extends Canvas implements Runnable, KeyListener, MouseListener
 		Game.audioMenu = new Audio("/audios/menu.wav");
 		Game.audioGame = new Audio("/audios/game.wav");
 
-		Game.newGame();
 		Game.setAudio(Game.audioMenu);
 	}
 
