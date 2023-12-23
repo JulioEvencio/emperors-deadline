@@ -1,10 +1,10 @@
 Credits go to:
 
-Seth_Makes_Sounds
+bainmack
 
-https://freesound.org/people/Seth_Makes_Sounds/
-https://freesound.org/people/Seth_Makes_Sounds/sounds/684875/
-https://freesound.org/people/Seth_Makes_Sounds/sounds/680393/
+https://freesound.org/people/bainmack/
+https://freesound.org/people/bainmack/sounds/678218/
+https://freesound.org/people/bainmack/sounds/679186/
 
 License:
 
