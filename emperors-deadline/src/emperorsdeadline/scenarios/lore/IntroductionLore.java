@@ -41,7 +41,7 @@ public class IntroductionLore {
 
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			Scenario.scenarioState = ScenarioState.WORLD;
+			Scenario.scenarioState = ScenarioState.INSTRUCTIONS;
 		}
 	}
 

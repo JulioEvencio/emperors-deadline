@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import emperorsdeadline.Game;
 import emperorsdeadline.strings.StringError;
 import emperorsdeadline.strings.StringGame;
+import emperorsdeadline.strings.StringInstructions;
 import emperorsdeadline.strings.StringInterfaceComponents;
 import emperorsdeadline.strings.StringIntroduction;
 import emperorsdeadline.strings.StringPause;
@@ -26,6 +27,7 @@ public class Language {
 				StringScenario.load(language);
 				StringScreen.load(language);
 				StringStore.load(language);
+				StringInstructions.load(language);
 			}
 		} catch (Exception e) {
 			Game.exitWithError("Error loading files");

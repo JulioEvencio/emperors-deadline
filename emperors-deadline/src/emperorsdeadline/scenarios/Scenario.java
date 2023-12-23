@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import emperorsdeadline.scenarios.lore.Instructions;
 import emperorsdeadline.scenarios.lore.IntroductionLore;
 import emperorsdeadline.scenarios.world.World;
 import emperorsdeadline.screens.GameOver;
@@ -13,6 +14,7 @@ import emperorsdeadline.screens.Victory;
 public class Scenario {
 
 	private final IntroductionLore introductionLore;
+	private final Instructions instructions;
 	private final GameOver gameOver;
 	private final Victory victory;
 
@@ -25,6 +27,7 @@ public class Scenario {
 
 	public Scenario() {
 		this.introductionLore = new IntroductionLore();
+		this.instructions = new Instructions();
 		this.gameOver = new GameOver();
 		this.victory = new Victory();
 
@@ -56,6 +59,8 @@ public class Scenario {
 			this.gameOver.render(graphics);
 		} else if (Scenario.scenarioState == ScenarioState.VICTORY) {
 			this.victory.render(graphics);
+		} else if (Scenario.scenarioState == ScenarioState.INSTRUCTIONS) {
+			this.instructions.render(graphics);
 		}
 	}
 
@@ -68,6 +73,8 @@ public class Scenario {
 			this.gameOver.keyReleased(e);
 		} else if (Scenario.scenarioState == ScenarioState.VICTORY) {
 			this.victory.keyReleased(e);
+		} else if (Scenario.scenarioState == ScenarioState.INSTRUCTIONS) {
+			this.instructions.keyReleased(e);
 		}
 
 		if ((Scenario.scenarioState == ScenarioState.WORLD || Scenario.scenarioState == ScenarioState.PAUSED) && (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)) {

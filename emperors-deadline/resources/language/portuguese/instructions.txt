@@ -1,0 +1,12 @@
+Instruções
+01. Casas aumentam a população
+02. A população gera ouro
+03. Fazendas geram comida
+04. Soldados consomem comida
+05. Serrarias geram madeira
+06. Minas de pedra geram pedra
+07. Quartéis são usados para treinar soldados
+08. Cada casa aumenta sua capacidade populacional em 50
+09. Cada fazenda aumenta sua capacidade de comida em 50
+10. Cada serraria aumenta sua capacidade de madeira em 100
+11. Cada mina de pedra aumenta sua capacidade de pedra em 100
